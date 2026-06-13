@@ -1,0 +1,7 @@
+{
+  "url": "https://www.navattic.com/blog",
+  "rss": null,
+  "note": "Navattic blog is rendered via Next.js with no exposed RSS or Atom feed as of 2026-06-13.",
+  "fetched": "2026-06-13",
+  "posts": []
+}

@@ -73,6 +73,10 @@ common:
     url: rate-limits/navattic-rate-limits.yml
   - type: FinOps
     url: finops/navattic-finops.yml
+  - type: BlogFeed
+    url: blogs/blogs.json
+  - type: JSONLDContext
+    url: json-ld/navattic-context.jsonld
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

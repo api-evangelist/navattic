@@ -1,0 +1,71 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "navattic": "https://www.navattic.com/",
+    "aid": "https://api-evangelist.com/aid#",
+    "InteractiveDemo": "navattic:InteractiveDemo",
+    "ProductDemo": "navattic:ProductDemo",
+    "DemoFlow": "navattic:DemoFlow",
+    "DemoProject": "navattic:DemoProject",
+    "DemoAnalytics": "navattic:DemoAnalytics",
+    "Visitor": "navattic:Visitor",
+    "VisitorSession": "navattic:VisitorSession",
+    "WebhookEvent": "navattic:WebhookEvent",
+    "AccessToken": "navattic:AccessToken",
+    "Launchpad": "navattic:Launchpad",
+    "DemoCapture": "navattic:DemoCapture",
+    "PersonalizedDemo": "navattic:PersonalizedDemo",
+    "DemoTheme": "navattic:DemoTheme",
+    "Organization": "schema:Organization",
+    "SoftwareApplication": "schema:SoftwareApplication",
+    "WebAPI": "schema:WebAPI",
+    "provider": "schema:provider",
+    "documentation": "schema:documentation",
+    "name": "schema:name",
+    "description": "schema:description",
+    "url": "schema:url"
+  },
+  "@type": "SoftwareApplication",
+  "name": "Navattic",
+  "description": "Interactive product demo platform enabling marketing and sales teams to create, manage, and embed no-code product demos. Provides REST API and webhook integration for automating demo workflows and syncing engagement data with CRM, marketing automation, and analytics tools.",
+  "url": "https://www.navattic.com/",
+  "provider": {
+    "@type": "Organization",
+    "name": "Navattic",
+    "url": "https://www.navattic.com/",
+    "sameAs": [
+      "https://github.com/Navattic",
+      "https://www.linkedin.com/company/navattic",
+      "https://x.com/navattic"
+    ]
+  },
+  "offers": {
+    "@type": "WebAPI",
+    "name": "Navattic API",
+    "url": "https://api.navattic.com",
+    "documentation": "https://docs.navattic.com/",
+    "termsOfService": "https://www.navattic.com/",
+    "potentialAction": [
+      {
+        "@type": "Action",
+        "name": "list_demo_analytics",
+        "description": "Retrieve analytics and engagement data for demos"
+      },
+      {
+        "@type": "Action",
+        "name": "list_visitors",
+        "description": "List visitors who have engaged with demos"
+      },
+      {
+        "@type": "Action",
+        "name": "create_flow",
+        "description": "Create a new demo flow"
+      },
+      {
+        "@type": "Action",
+        "name": "list_projects",
+        "description": "List all demo projects in the workspace"
+      }
+    ]
+  }
+}
