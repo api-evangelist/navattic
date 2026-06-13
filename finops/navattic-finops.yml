@@ -1,0 +1,86 @@
+name: Navattic FinOps
+description: >
+  FinOps Framework FOCUS-aligned cost and usage information for the Navattic
+  interactive product demo platform. Navattic pricing is seat-based with plan
+  tiers gating features such as demo types, integrations, and analytics depth.
+  All paid plans require a minimum quarterly commitment with annual billing
+  offering the best rates.
+url: https://www.navattic.com/pricing
+specificationVersion: "1.0"
+provider: Navattic
+billingModel: seat-based
+billingCycles:
+  - monthly
+  - quarterly
+  - annual
+currency: USD
+costs:
+  - name: Starter Plan
+    description: Free tier with one demo, one seat, and basic analytics. No cost.
+    skuId: navattic-starter
+    chargeType: Usage
+    billedCurrency: USD
+    listUnitPrice: 0.00
+    pricingUnit: seat/month
+    commitmentDiscountType: none
+  - name: Starter Plus Plan
+    description: >
+      Single-seat paid tier with unlimited media demos, AI voiceover, and
+      custom branding. Billed monthly.
+    skuId: navattic-starter-plus
+    chargeType: Usage
+    billedCurrency: USD
+    listUnitPrice: 40.00
+    pricingUnit: seat/month
+    commitmentDiscountType: none
+  - name: Base Plan
+    description: >
+      Five-seat plan with unlimited HTML demos, CRM integrations, A/B testing,
+      and a dedicated CSM. Minimum three-month commitment.
+    skuId: navattic-base
+    chargeType: Usage
+    billedCurrency: USD
+    listUnitPrice: 500.00
+    pricingUnit: plan/month
+    commitmentDiscountType: quarterly
+    minimumCommitmentMonths: 3
+  - name: Growth Plan
+    description: >
+      Ten-seat plan adding sandbox demos, demo translation, advanced analytics,
+      SSO, custom domains, and buyer intelligence. Minimum three-month
+      commitment.
+    skuId: navattic-growth
+    chargeType: Usage
+    billedCurrency: USD
+    listUnitPrice: 1000.00
+    pricingUnit: plan/month
+    commitmentDiscountType: quarterly
+    minimumCommitmentMonths: 3
+  - name: Enterprise Plan
+    description: >
+      Custom-priced enterprise plan with offline demos, audit logs, custom
+      permissions, and professional services. Pricing requires sales
+      consultation. Annual contracts typical; month-to-month available at a
+      25-40% premium.
+    skuId: navattic-enterprise
+    chargeType: Usage
+    billedCurrency: USD
+    listUnitPrice: 0.00
+    pricingNote: Custom; contact sales. Typical range $5,000–$12,000+/month.
+    pricingUnit: plan/month
+    commitmentDiscountType: annual
+costOptimizationRecommendations:
+  - description: >
+      Commit to annual billing rather than quarterly to realize the lowest
+      effective monthly rate on Base and Growth plans.
+  - description: >
+      Evaluate the Starter tier before purchasing to validate demo workflows
+      before committing to the three-month minimum on Base ($1,500 minimum
+      spend).
+  - description: >
+      Consolidate demo creation into fewer seats where possible, as Navattic
+      pricing is seat-gated per tier rather than per-demo.
+  - description: >
+      Use the Navattic webhook integration with a free tier data warehouse or
+      CDP endpoint to avoid additional analytics tool costs for demo engagement
+      reporting.

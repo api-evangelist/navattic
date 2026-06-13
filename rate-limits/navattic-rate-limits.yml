@@ -1,0 +1,41 @@
+name: Navattic Rate Limits
+description: >
+  Rate limiting information for the Navattic API and webhook delivery system.
+  Navattic does not publicly document specific numeric rate limits for its REST
+  API. The platform commits to minimizing breaking changes with advance notice
+  to developers. Webhook events are delivered on session close and are
+  event-driven rather than subject to polling limits.
+url: https://docs.navattic.com/integrations/webhook
+specificationVersion: "0.1"
+rateLimits:
+  - name: API Rate Limit
+    description: >
+      Navattic does not publicly disclose specific rate limit thresholds for
+      the REST API. Developers should implement standard exponential backoff
+      and retry logic for 429 Too Many Requests responses. Contact
+      team@navattic.com for rate limit details applicable to your plan.
+    type: api
+    documented: false
+  - name: Webhook Delivery
+    description: >
+      Webhook events are delivered in real time when a visitor session is
+      marked as closed. Each closed session generates one POST request to the
+      configured webhook URL containing session metadata, recorded events, end-
+      user details, and optional CRM-linked fields (e.g., Salesforce opportunity
+      owner). Navattic recommends using webhook.site for testing and Zapier for
+      filtering before forwarding to downstream destinations.
+    type: webhook
+    triggerEvent: session_closed
+    payloadFormat: JSON
+    timestampFormat: ISO-8601
+    documented: true
+    documentationUrl: https://docs.navattic.com/integrations/webhook
+  - name: Playbook Action Limits
+    description: >
+      Playbooks automate actions based on demo engagement events such as step
+      completion, link clicks, or form submissions. The number of active
+      playbooks and automation triggers available depends on the subscribed
+      plan tier. Specific per-plan limits are available on request from
+      Navattic support.
+    type: automation
+    documented: false

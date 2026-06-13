@@ -1,0 +1,106 @@
+name: Navattic Plans and Pricing
+description: Pricing tiers for the Navattic interactive product demo platform.
+url: https://www.navattic.com/pricing
+specificationVersion: "0.1"
+plans:
+  - name: Starter
+    description: >
+      Free tier for individuals getting started with interactive demos. Limited
+      to a single demo with unlimited views and basic analytics.
+    url: https://www.navattic.com/pricing
+    price: 0
+    currency: USD
+    billingCycle: monthly
+    features:
+      - 1 interactive demo (HTML or media)
+      - 1 seat
+      - Unlimited views
+      - Basic analytics
+      - Default theme
+      - Starter AI Copilot
+  - name: Starter Plus
+    description: >
+      Entry paid tier offering unlimited media demos, custom branding, and AI
+      voiceover for small teams or individuals.
+    url: https://www.navattic.com/pricing
+    price: 40
+    currency: USD
+    billingCycle: monthly
+    features:
+      - 1 seat
+      - Unlimited media demos
+      - AI voiceover
+      - Custom branding
+      - Starter AI Copilot
+  - name: Base
+    description: >
+      Mid-tier plan for small go-to-market teams requiring CRM integrations,
+      HTML demos, A/B testing, and a dedicated customer success manager.
+    url: https://www.navattic.com/pricing
+    price: 500
+    currency: USD
+    billingCycle: monthly
+    billingNote: Billed quarterly (3-month minimum) or annually
+    features:
+      - 5 seats
+      - Unlimited HTML demos
+      - Base AI Copilot
+      - AI voiceover
+      - AI avatars
+      - 25+ integrations (HubSpot, Salesforce, Marketo, Segment)
+      - Embedded forms
+      - A/B testing
+      - Personalization
+      - Dedicated CSM
+  - name: Growth
+    description: >
+      Advanced plan for scaling GTM teams requiring sandbox demos, demo
+      translation, advanced analytics, SSO, custom domains, and buyer
+      intelligence features.
+    url: https://www.navattic.com/pricing
+    price: 1000
+    currency: USD
+    billingCycle: monthly
+    billingNote: Billed quarterly (3-month minimum) or annually
+    features:
+      - 10 seats
+      - All Base features
+      - AI avatar cloning
+      - Launchpad
+      - Interest level demos
+      - Sandbox demos
+      - Demo translation
+      - Email and Slack alerts
+      - Buyer circle discovery
+      - Rep contact cards
+      - Personal intro videos
+      - Account identification
+      - Narrated demos
+      - Advanced analytics
+      - Custom domains
+      - Teams
+      - SSO
+      - Approval workflows
+  - name: Enterprise
+    description: >
+      Custom enterprise plan for large organizations requiring offline demos,
+      audit logs, custom permissions, professional services, and priority
+      support.
+    url: https://www.navattic.com/pricing
+    price: 0
+    currency: USD
+    billingCycle: custom
+    billingNote: Custom pricing; contact sales
+    features:
+      - Custom seats
+      - All Growth features
+      - Offline demos
+      - HTML capture translation
+      - Audit logs
+      - Custom permissions
+      - Professional services
+      - Priority support
+      - Demo consultation
+      - Custom contracts
+      - Dedicated CSM
+      - Security review support
