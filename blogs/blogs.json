@@ -2,6 +2,14 @@
   "url": "https://www.navattic.com/blog",
   "rss": null,
   "note": "Navattic blog is rendered via Next.js with no exposed RSS or Atom feed as of 2026-06-13.",
-  "fetched": "2026-06-13",
-  "posts": []
+  "fetched": "2026-06-14T20:42:17Z",
+  "posts": [],
+  "repo": "navattic",
+  "feeds": [
+    {
+      "source": "https://www.linkedin.com/company/navattic",
+      "error": "HTTPError"
+    }
+  ],
+  "post_count": 0
 }
