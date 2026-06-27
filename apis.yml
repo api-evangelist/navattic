@@ -46,7 +46,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.navattic.com/
-      - type: Webhook
+      - type: Webhooks
         url: https://docs.navattic.com/integrations/webhook
       - type: Pricing
         url: https://www.navattic.com/pricing
