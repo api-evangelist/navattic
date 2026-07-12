@@ -51,6 +51,10 @@ apis:
       - type: Pricing
         url: https://www.navattic.com/pricing
 common:
+  - type: VulnerabilityDisclosure
+    url: security/navattic-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/navattic-domain-security.yml
   - type: Website
     url: https://www.navattic.com/
   - type: Documentation
