@@ -2,13 +2,11 @@
   "repo": "navattic",
   "feeds": [
     {
-      "source": "https://www.navattic.com/blog",
-      "feed_url": "",
-      "saved": 5,
-      "method": "agent-scrape"
+      "source": "https://www.linkedin.com/company/navattic",
+      "error": "HTTPError"
     }
   ],
-  "fetched": "2026-06-27T12:55:43Z",
-  "post_count": 6,
-  "agent_pulled": "2026-06-27"
+  "fetched": "2026-07-11T11:50:51Z",
+  "post_count": 7,
+  "agent_pulled": "2026-07-04"
 }
