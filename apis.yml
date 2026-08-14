@@ -26,7 +26,7 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/navattic.png
 url: https://raw.githubusercontent.com/api-evangelist/navattic/refs/heads/main/apis.yml
 created: 2026-06-13
-modified: 2026-06-13
+modified: 2026-08-13
 specificationVersion: "0.19"
 tags:
   - Interactive Demos
@@ -37,17 +37,21 @@ tags:
   - Webhooks
   - CRM Integration
   - Sales Automation
+  - MCP
+  - Agents
+  - Product Analytics
 apis:
   - aid: navattic:navattic-api
     name: Navattic API
     description: >
       The Navattic REST API allows developers to programmatically create and
       manage interactive product demos, retrieve analytics and engagement data,
-      and integrate demo activity into downstream systems. The API uses API key
-      authentication and supports webhook delivery of session-closed events
-      containing visitor engagement data, company account information, and
-      CRM-linked fields. Navattic also provides an MCP (Model Context Protocol)
-      server for AI coding agents to interact with the platform programmatically.
+      and integrate demo activity into downstream systems. Navattic publishes no
+      public REST reference for the product itself — its machine-readable
+      surfaces are a hosted MCP server, a fully documented outbound webhook, and
+      an RFC 9727 api-catalog on the marketing host that points at both. The
+      webhook delivers session-closed events carrying visitor engagement data,
+      company account firmographics, and CRM-linked fields.
     humanURL: https://docs.navattic.com/
     baseURL: https://api.navattic.com
     tags:
@@ -62,6 +66,35 @@ apis:
         url: https://docs.navattic.com/integrations/webhook
       - type: Pricing
         url: https://www.navattic.com/pricing
+      - type: OpenAPI
+        url: openapi/navattic-website-openapi.json
+      - type: Overlay
+        url: overlays/navattic-website-overlay.yaml
+  - aid: navattic:navattic-mcp-server
+    name: Navattic MCP Server
+    description: >
+      Navattic's hosted, remote Model Context Protocol server — the company's
+      primary machine-readable product surface. Agents authenticate with an
+      OAuth 2.1 authorization-code flow (PKCE, dynamic client registration) or
+      with a workspace Personal Access Token sent as a bearer token, and receive
+      workspace-scoped access to demo analytics, demo browsing, demo building,
+      demo management, demo publishing, personalization and Launchpad, governed
+      by eleven published OAuth scopes. Writes carry an entity_tag optimistic
+      concurrency token and each batch of edits applies atomically.
+    humanURL: https://docs.navattic.com/workspace/mcp-server
+    baseURL: https://app.navattic.com/api/mcp
+    tags:
+      - MCP
+      - Agents
+      - OAuth
+      - Interactive Demos
+    properties:
+      - type: MCPServer
+        url: mcp/navattic-mcp.yml
+      - type: ToolCrosswalk
+        url: mcp/navattic-tool-crosswalk.yml
+      - type: Documentation
+        url: https://docs.navattic.com/workspace/mcp-server
 common:
   - type: VulnerabilityDisclosure
     url: security/navattic-vulnerability-disclosure.yml
@@ -93,6 +126,75 @@ common:
     url: blogs/blogs.json
   - type: JSONLDContext
     url: json-ld/navattic-context.jsonld
+  - type: Security
+    url: https://www.navattic.com/company/security
+  - type: TrustCenter
+    url: security/navattic-trust-center.yml
+  - type: Compliance
+    url: https://trust.navattic.com/
+  - type: WellKnown
+    url: well-known/navattic-well-known.yml
+  - type: APICatalog
+    url: well-known/navattic-api-catalog.json
+  - type: ContentSignal
+    url: well-known/navattic-robots.txt
+  - type: AgentCard
+    url: a2a/navattic-a2a.yml
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: LLMsTxt
+    url: llms/navattic-llms.txt
+  - type: Authentication
+    url: authentication/navattic-authentication.yml
+  - type: OAuthScopes
+    url: scopes/navattic-scopes.yml
+  - type: Conventions
+    url: conventions/navattic-conventions.yml
+  - type: ErrorCatalog
+    url: errors/navattic-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/navattic-lifecycle.yml
+  - type: ChangeLog
+    url: changelog/navattic-changelog.yml
+  - type: Conformance
+    url: conformance/navattic-conformance.yml
+  - type: Packages
+    url: packages/navattic-packages.yml
+  - type: Components
+    url: components/navattic-components.yml
+  - type: DataModel
+    url: data-model/navattic-data-model.yml
+  - type: Webhooks
+    url: asyncapi/navattic-webhooks.yml
+  - type: GettingStarted
+    url: https://docs.navattic.com/build/demo
+  - type: Support
+    url: https://www.navattic.com/contact
+  - type: SignUp
+    url: https://app.navattic.com/signup
+  - type: Login
+    url: https://app.navattic.com/login
+  - type: TermsOfService
+    url: https://www.navattic.com/legal/terms
+  - type: PrivacyPolicy
+    url: https://www.navattic.com/legal/privacy
+  - type: GitHubOrganization
+    url: https://github.com/Navattic
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-08-13'
+  status: enriched
+  artifacts_added: 24
+  pass: local-v1
+x-coverage:
+  state: covered
+  note: >
+    Contract discovery hit. The RFC 9727 api-catalog at
+    https://www.navattic.com/.well-known/api-catalog led to a real OpenAPI on the
+    marketing host and to the hosted MCP server at
+    https://app.navattic.com/api/mcp, whose tools/list is OAuth-gated (401) but
+    whose RFC 8414 / RFC 9728 metadata, eleven scopes, agent card, published
+    Agent Skill, llms.txt and webhook reference are all public.
+  checked: '2026-08-13'
