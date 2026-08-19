@@ -1,0 +1,45 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Navattic marketing website API
+  version: 1.0.0
+extends: openapi/navattic-website-openapi.json
+x-generated: '2026-08-13'
+x-method: generated
+x-source: openapi/navattic-website-openapi.json
+x-note: >
+  Enhancements only — the harvested spec is never mutated. Navattic's published
+  spec is honest but minimal (one unauthenticated health operation), so this
+  overlay adds the operationId-adjacent metadata and the cross-references that
+  place it in the wider Navattic estate: the product surface is the MCP server,
+  not this host.
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-slug: navattic
+      x-apievangelist-harvested: '2026-08-13'
+      x-apievangelist-source: https://www.navattic.com/.well-known/openapi.json
+      x-apievangelist-discovery: https://www.navattic.com/.well-known/api-catalog
+      x-apievangelist-scope: >
+        Marketing website only. Navattic publishes no OpenAPI for the product;
+        the callable product surface is the MCP server at
+        https://app.navattic.com/api/mcp.
+      x-apievangelist-related:
+        mcp: mcp/navattic-mcp.yml
+        webhooks: asyncapi/navattic-webhooks.yml
+        agent_card: a2a/navattic-a2a.yml
+        authentication: authentication/navattic-authentication.yml
+  - target: $.paths['/api/health'].get
+    update:
+      tags:
+        - Status
+      x-apievangelist-verified:
+        checked: '2026-08-13'
+        http_status: 200
+        body: '{"status":"ok"}'
+      x-apievangelist-note: >
+        Referenced as rel="status" from the RFC 9727 api-catalog linkset.
+  - target: $
+    update:
+      tags:
+        - name: Status
+          description: Service health for the Navattic marketing website.

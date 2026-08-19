@@ -1,0 +1,106 @@
+generated: '2026-08-13'
+method: searched
+source: https://docs.navattic.com/share/embed
+also_source:
+  - https://docs.navattic.com/tracking/navattic-js
+  - https://docs.navattic.com/tracking/navattic-js/subscribe-to-events
+description: >
+  Navattic's product IS an embeddable client-side surface, so its component layer
+  is unusually substantial for a company with no REST API: an iframe embed, a
+  script-driven pop-up embed with data attributes, and a browser tracking library
+  with an identify/event API. These are distinct from SDKs — none of them calls
+  a Navattic API on the developer's behalf.
+families:
+  - name: Demo embeds
+    docs: https://docs.navattic.com/share/embed
+    loader: https://js.navattic.com/embeds.js
+    components:
+      - kind: iframe
+        name: Inline embed
+        description: >
+          The demo rendered inline in the host page via an <iframe> pointing at
+          the demo's share URL. The parent container must have an explicit
+          height or the iframe collapses to zero height.
+      - kind: script + data-attribute
+        name: Pop-up embed
+        description: >
+          Any element becomes a demo trigger with data-navattic-open="<demo
+          url>" plus embeds.js. data-navattic-title sets the label.
+        attributes:
+          - {name: data-navattic-open, value: 'the demo share URL'}
+          - {name: data-navattic-title, value: 'display title'}
+          - {name: data-navattic-preload, value: 'false disables preloading of the demo'}
+        note: >
+          Because a framed demo cannot control its parent page, Navattic
+          documents closing a pop-up by listening with navattic.onEvent() in the
+          host page's own JavaScript rather than shipping a close API.
+      - kind: accessibility/SEO
+        name: AI visibility text
+        description: >
+          When enabled, Copilot generates a plain-text walkthrough of the demo
+          and includes it in the embed code — hidden from visitors, readable by
+          AI crawlers and search engines, so iframe-bound demo content stays
+          discoverable.
+  - name: Navattic JS
+    docs: https://docs.navattic.com/tracking/navattic-js
+    loader: https://js.navattic.com/navattic.js
+    setup: https://app.navattic.com/w/settings/js
+    components:
+      - kind: js-api
+        name: navattic.identify()
+        signature: 'navattic.identify({ email: user.email })'
+        description: >
+          Associates the current browser with a known visitor. Takes priority
+          over automatic capture methods.
+      - kind: js-api
+        name: navattic.onEvent()
+        signature: 'navattic.onEvent(function(eventData) { ... })'
+        description: >
+          Subscribes the host page to demo activity events (same recorded-event
+          types as the webhook payload), for forwarding into whatever analytics
+          the site already runs.
+        documented_targets: [Google Analytics 4, Google Tag Manager, Segment, HubSpot Forms, Marketo Forms]
+    configuration:
+      - {option: Auto form tracking, description: 'Capture visitor identity from external forms outside the demo (e.g. a HubSpot form on the marketing site)'}
+      - {option: Cross-domain tracking, description: 'Track one visitor across company.com, docs.company.com and blog.company.com'}
+      - {option: CRM tracking scripts, description: 'Match demo visitors to existing HubSpot or Marketo contacts via existing cookies'}
+      - {option: Query parameter tracking, description: 'Promote parent-page query parameters (utm_medium, client_id, …) into visitor properties'}
+    limitation: >
+      Browser security prevents automatic capture of form submissions inside
+      iframes; Navattic publishes a postMessage workaround
+      (kind: 'navattic:iframe-form-submission') for Pardot and similar embedded
+      forms.
+  - name: Compass UI
+    docs: https://ui.navattic.com/
+    package: "@navattic/compass-ui"
+    registry: npm
+    version: 1.0.9
+    components:
+      - kind: design-system
+        name: Compass UI component set
+        description: >
+          Navattic's published React component library with a Storybook at
+          ui.navattic.com. First-party and installable, but it is Navattic's own
+          design system rather than a customer integration surface.
+  - name: Hosted surfaces
+    components:
+      - kind: hosted-page
+        name: Share link
+        description: >
+          A demo served at its own trackable URL, with link expiration, password
+          protection, email-domain restriction, form gating and revocation
+          available as access controls.
+        docs: https://docs.navattic.com/workspace/security
+      - kind: hosted-page
+        name: Custom domains
+        description: Demos served over HTTPS from the customer's own branded domain.
+        docs: https://docs.navattic.com/workspace/custom-domains
+cdn_hosts:
+  - {host: js.navattic.com, purpose: 'component and tracking bundles'}
+  - {host: c.navattic.com, purpose: 'capture/media asset delivery (seen in the app CSP)'}
+  - {host: capture.navattic.com, purpose: 'demo share URLs used in embed examples'}
+x-evidence:
+  - {url: 'https://docs.navattic.com/share/embed.md', status: 200}
+  - {url: 'https://docs.navattic.com/tracking/navattic-js/index.md', status: 200}
+  - {url: 'https://js.navattic.com/embeds.js', status: 200}
+  - {url: 'https://js.navattic.com/navattic.js', status: 200}

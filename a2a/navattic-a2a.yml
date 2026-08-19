@@ -1,0 +1,63 @@
+generated: '2026-08-13'
+method: probed
+source: https://docs.navattic.com/.well-known/agent-card.json
+discovery:
+  path: /.well-known/agent-card.json
+  canonical: true
+  host: docs.navattic.com
+conformance:
+  spec: A2A 1.0.0
+  grade: near-conformant
+  protocol_version: '0.3'
+  preferred_transport: HTTP+JSON
+  hard_checks:
+    capabilities_is_object: true
+    protocol_version_present: true
+    skills_is_array: true
+  deviations:
+    - supportedInterfaces-instead-of-additionalInterfaces
+    - protocolVersion-0.3-predates-a2a-1.0.0
+    - no-description-field
+  notes: >-
+    A real provider-served card at the canonical path on Navattic's own
+    documentation host. It passes all three hard checks — `capabilities` is an
+    object, `protocolVersion` is present, `skills` is an array — and it carries
+    the optional `preferredTransport`, `defaultInputModes` and
+    `defaultOutputModes`, so it is not merely a stub. It uses the pre-0.3 field
+    name `supportedInterfaces` rather than `additionalInterfaces` and declares
+    protocolVersion "0.3" rather than a 1.0.0 version, which is why this is
+    graded near-conformant rather than conformant. The card scopes itself to the
+    documentation surface ("Navattic Documentation"), not to the product API —
+    the callable product surface is the MCP server at
+    https://app.navattic.com/api/mcp (see mcp/navattic-mcp.yml), which this card
+    does not reference.
+card:
+  name: Navattic Documentation
+  url: https://docs.navattic.com/
+  version: 1.0.0
+  provider: Navattic Documentation
+  documentation_url: https://docs.navattic.com/
+  capabilities:
+    streaming: false
+    push_notifications: false
+  default_input_modes: [text/plain]
+  default_output_modes: [text/plain]
+  skills: 1
+  skill_ids: [navattic]
+  skill_urls:
+    - https://docs.navattic.com/.well-known/agent-skills/navattic/skill.md
+  file: navattic-agent-card.json
+x-evidence:
+  fetched: '2026-08-13'
+  url: https://docs.navattic.com/.well-known/agent-card.json
+  http_status: 200
+  content_type: application/json
+  body_bytes: 1027
+  negative_probes:
+    - {url: 'https://www.navattic.com/.well-known/agent-card.json', status: 404}
+    - {url: 'https://www.navattic.com/.well-known/agent.json', status: 404}
+    - {url: 'https://app.navattic.com/.well-known/agent-card.json', status: 404}
+    - {url: 'https://app.navattic.com/.well-known/agent.json', status: 404}
+    - {url: 'https://api.navattic.com/.well-known/agent-card.json', status: 404}
+    - {url: 'https://api.navattic.com/.well-known/agent.json', status: 404}
+    - {url: 'https://docs.navattic.com/.well-known/agent.json', status: 404}

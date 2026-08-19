@@ -1,0 +1,88 @@
+generated: '2026-08-13'
+method: searched
+source: https://docs.navattic.com/workspace/mcp-server
+docs: https://docs.navattic.com/workspace/mcp-server
+also_probed:
+  - https://app.navattic.com/.well-known/oauth-authorization-server
+  - https://app.navattic.com/.well-known/oauth-protected-resource
+description: >
+  Navattic's authenticated developer surface is the hosted MCP server at
+  https://app.navattic.com/api/mcp. It accepts two credentials against the same
+  endpoint: an OAuth 2.1 authorization-code grant with PKCE and dynamic client
+  registration, or a workspace Personal Access Token presented as an HTTP bearer
+  token. Both are scope-limited and workspace-isolated. The published website
+  OpenAPI declares no securitySchemes because its single operation
+  (GET /api/health) is unauthenticated; there is no public REST product API to
+  profile, so this artifact is searched from the docs and the RFC 8414 / RFC 9728
+  metadata rather than derived from a spec.
+summary:
+  types: [oauth2, http]
+  api_key_in: []
+  http_schemes: [bearer]
+  oauth2_flows: [authorizationCode]
+  pkce: true
+  dynamic_client_registration: true
+  token_endpoint_auth_methods: [none]
+schemes:
+  - name: NavatticMCPOAuth
+    type: oauth2
+    applies_to: https://app.navattic.com/api/mcp
+    sources: [https://app.navattic.com/.well-known/oauth-authorization-server]
+    flows:
+      - flow: authorizationCode
+        issuer: https://app.navattic.com
+        authorizationUrl: https://app.navattic.com/api/mcp/oauth/authorize
+        tokenUrl: https://app.navattic.com/api/mcp/oauth/token
+        registrationUrl: https://app.navattic.com/api/mcp/oauth/register
+        revocationUrl: https://app.navattic.com/api/mcp/oauth/revoke
+        grant_types: [authorization_code, refresh_token]
+        response_types: [code]
+        scope_count: 11
+        scopes_detail: scopes/navattic-scopes.yml
+    clients_documented: [ChatGPT, Claude Desktop, Claude Code, Gemini Enterprise]
+  - name: NavatticPersonalAccessToken
+    type: http
+    scheme: bearer
+    applies_to: https://app.navattic.com/api/mcp
+    sources: [https://docs.navattic.com/workspace/mcp-server]
+    credential: Personal Access Token
+    header: 'Authorization: Bearer <token>'
+    creation:
+      location: Settings > Workspace > Access Tokens
+      who_can_create: Workspace Admins only
+      who_can_view: Builders can view existing tokens but cannot create or revoke them
+      max_active_per_user: 25
+      shown_once: true
+    expiration_days: [7, 30, 60, 90, 180]
+    scope_selection: Scopes are chosen per token at creation time
+    clients_documented: [Cursor, VS Code, Windsurf, Codex, IBM Bob, Microsoft Copilot Studio]
+workspace_identity:
+  sso:
+    supported: true
+    docs: https://docs.navattic.com/workspace/sso
+    note: Members can be required to authenticate through an identity provider such as Okta or Azure AD.
+  directory_sync:
+    supported: true
+    protocol: SCIM
+    docs: https://docs.navattic.com/workspace/directory-sync
+    note: Automatic user provisioning and deprovisioning.
+  roles: [Admin, Builder, Rep]
+  note: >
+    Workspace SSO/SCIM govern human members of the Navattic app, not API
+    credentials. No customer-facing OIDC discovery document is served on any
+    Navattic host (/.well-known/openid-configuration is 404 on www, app, and
+    api). The 200 at academy.navattic.com/.well-known/openid-configuration
+    belongs to Thinkific, not Navattic.
+webhook_authentication:
+  outbound: true
+  docs: https://docs.navattic.com/integrations/webhook
+  note: >
+    Navattic signs nothing, but it will send an Authorization header on outbound
+    webhook deliveries when one is configured on the webhook —
+    "Basic <credentials>" or "Bearer <token>". There is no HMAC signature
+    header documented.
+x-evidence:
+  - {url: 'https://app.navattic.com/api/mcp', status: 401, note: 'anonymous POST returns "Provide a valid access token as a Bearer token in the Authorization header."'}
+  - {url: 'https://app.navattic.com/.well-known/oauth-authorization-server', status: 200}
+  - {url: 'https://app.navattic.com/.well-known/oauth-protected-resource', status: 200}
+  - {url: 'https://app.navattic.com/.well-known/openid-configuration', status: 404}

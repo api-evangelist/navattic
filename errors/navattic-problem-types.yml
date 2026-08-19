@@ -1,0 +1,56 @@
+generated: '2026-08-13'
+method: probed
+source: live responses from https://app.navattic.com/api/mcp, https://api.navattic.com and https://www.navattic.com
+format: none
+rfc9457: false
+description: >
+  Navattic publishes no error reference. The website OpenAPI declares no 4xx/5xx
+  responses to derive from — it has one operation, GET /api/health, with a 200
+  only — so this catalog records only error envelopes actually observed on the
+  wire. Two distinct shapes are in use across the estate, neither of which is
+  application/problem+json.
+problems:
+  - status: 401
+    surface: https://app.navattic.com/api/mcp
+    content_type: application/json
+    envelope_field: error
+    body: 'Unauthorized. Provide a valid access token as a Bearer token in the Authorization header.'
+    title: Unauthorized
+    remediation: >
+      Complete the OAuth authorization-code flow, or send a workspace Personal
+      Access Token as `Authorization: Bearer <token>`. Returned for both
+      `initialize` and `tools/list` when no credential is presented.
+    method: probed
+  - status: 404
+    surface: https://api.navattic.com/*
+    content_type: application/json
+    envelope_field: message
+    body: Request unhandled
+    title: Request unhandled
+    remediation: >
+      Observed on api.navattic.com for unrouted paths. Note the different
+      envelope field (`message`, not `error`) from the MCP surface.
+    method: probed
+  - status: 404
+    surface: https://app.navattic.com/*, https://api.navattic.com/*
+    content_type: text/html
+    envelope_field: null
+    title: Application 404 page
+    remediation: >
+      Most unrouted paths on the app and api hosts return the Next.js HTML
+      error shell rather than JSON, including every /.well-known/* path that is
+      not implemented. Clients must not treat a 200/404 HTML body as an API
+      response.
+    method: probed
+observations:
+  envelope_consistency: false
+  envelope_note: >
+    Three response shapes for failure across the estate — {"error": string},
+    {"message": string}, and an HTML page — with no shared error code, type URI
+    or request identifier.
+  error_codes_published: false
+  problem_json: false
+derived_from_openapi:
+  file: openapi/navattic-website-openapi.json
+  responses_4xx_5xx: 0
+  note: The published spec documents no failure responses.

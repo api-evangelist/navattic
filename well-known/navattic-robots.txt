@@ -1,0 +1,15 @@
+# *
+User-agent: *
+Allow: /
+
+Content-Signal: ai-train=no, search=yes, ai-input=no
+
+# *
+User-agent: *
+Disallow: /dev/*
+
+# Host
+Host: https://www.navattic.com
+
+# Sitemaps
+Sitemap: https://www.navattic.com/sitemap.xml

@@ -1,4 +1,4 @@
-generated: '2026-07-11'
+generated: '2026-08-13'
 method: probed
 source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
 hosts:
@@ -23,12 +23,12 @@ domains:
 - domain: navattic.com
   dnssec: false
   caa:
-  - 0 issue "sectigo.com"
-  - 0 issuewild "letsencrypt.org"
-  - 0 issuewild "pki.goog"
   - 0 issuewild "pki.goog; cansignhttpexchanges=yes"
   - 0 issuewild "sectigo.com"
   - 0 issue "letsencrypt.org"
+  - 0 issue "pki.goog"
+  - 0 issue "pki.goog; cansignhttpexchanges=yes"
+  - 0 issue "sectigo.com"
   spf: true
   dmarc: true
   dmarc_policy: quarantine

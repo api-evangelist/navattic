@@ -1,0 +1,108 @@
+generated: '2026-08-13'
+method: searched
+source: https://app.navattic.com/.well-known/oauth-authorization-server
+docs: https://docs.navattic.com/workspace/mcp-server
+description: >
+  Navattic publishes its OAuth scope list twice — machine-readably in the RFC
+  8414 authorization-server metadata and the RFC 9728 protected-resource
+  metadata, and in prose as a scope/permission table on the MCP docs page, which
+  adds the required workspace role for each. The two lists agree on the seven
+  scopes the docs describe; the metadata advertises four more that the docs do
+  not yet document. Both facts are recorded below.
+schemes:
+  - name: NavatticMCPOAuth
+    source: https://app.navattic.com/.well-known/oauth-authorization-server
+    resource: https://app.navattic.com/api/mcp
+    resource_name: Navattic MCP Server
+    flows:
+      - flow: authorizationCode
+        authorizationUrl: https://app.navattic.com/api/mcp/oauth/authorize
+        tokenUrl: https://app.navattic.com/api/mcp/oauth/token
+        pkce: true
+scopes:
+  - scope: ANALYTICS
+    description: View demo performance, visitor data and account engagement.
+    required_role: Viewer or above
+    flows: [authorizationCode]
+    documented: true
+    sources: [oauth-authorization-server, oauth-protected-resource, docs]
+  - scope: DEMO_BROWSING
+    description: Browse projects, flows and share links.
+    required_role: Viewer or above
+    flows: [authorizationCode]
+    documented: true
+    sources: [oauth-authorization-server, oauth-protected-resource, docs]
+  - scope: DEMO_BUILDING
+    description: >
+      Create flows; edit steps, buttons, navigation, beacons, media, voiceover
+      and presenter settings.
+    required_role: Builder or above
+    flows: [authorizationCode]
+    documented: true
+    sources: [oauth-authorization-server, oauth-protected-resource, docs]
+  - scope: DEMO_MANAGEMENT
+    description: Rename and organize projects; create share links.
+    required_role: Builder or above
+    flows: [authorizationCode]
+    documented: true
+    sources: [oauth-authorization-server, oauth-protected-resource, docs]
+  - scope: DEMO_PUBLISHING
+    description: Publish and archive demos.
+    required_role: Builder or above
+    flows: [authorizationCode]
+    documented: true
+    sources: [oauth-authorization-server, oauth-protected-resource, docs]
+  - scope: PERSONALIZATION
+    description: View custom properties and visitor activity.
+    required_role: Viewer or above
+    flows: [authorizationCode]
+    documented: true
+    sources: [oauth-authorization-server, oauth-protected-resource, docs]
+  - scope: LAUNCHPAD
+    description: >
+      Browse and manage Launchpad share links, interest flows and recipient
+      visitor data. Only offered in workspaces with Launchpad enabled, and only
+      shown to users holding the Launchpad app role.
+    required_role: Viewer or above (Launchpad workspaces only)
+    flows: [authorizationCode]
+    documented: true
+    sources: [oauth-authorization-server, oauth-protected-resource, docs]
+  - scope: AGENT_DEMOS
+    description: null
+    required_role: null
+    flows: [authorizationCode]
+    documented: false
+    note: >
+      Advertised in scopes_supported but absent from the docs scope table. Left
+      undescribed rather than guessed; likely relates to the AGENT_DEMO session
+      type that appears in the webhook payload reference.
+    sources: [oauth-authorization-server, oauth-protected-resource]
+  - scope: AGENT_ENVIRONMENTS
+    description: null
+    required_role: null
+    flows: [authorizationCode]
+    documented: false
+    note: Advertised in scopes_supported but absent from the docs scope table.
+    sources: [oauth-authorization-server, oauth-protected-resource]
+  - scope: WORKSPACE_MANAGEMENT
+    description: null
+    required_role: null
+    flows: [authorizationCode]
+    documented: false
+    note: Advertised in scopes_supported but absent from the docs scope table.
+    sources: [oauth-authorization-server, oauth-protected-resource]
+  - scope: NOTIFICATIONS
+    description: null
+    required_role: null
+    flows: [authorizationCode]
+    documented: false
+    note: Advertised in scopes_supported but absent from the docs scope table.
+    sources: [oauth-authorization-server, oauth-protected-resource]
+coverage:
+  scopes_advertised: 11
+  scopes_documented: 7
+  scopes_undocumented: 4
+x-evidence:
+  - {url: 'https://app.navattic.com/.well-known/oauth-authorization-server', status: 200}
+  - {url: 'https://app.navattic.com/.well-known/oauth-protected-resource', status: 200}
+  - {url: 'https://docs.navattic.com/workspace/mcp-server.md', status: 200}

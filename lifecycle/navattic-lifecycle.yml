@@ -1,0 +1,74 @@
+generated: '2026-08-13'
+method: searched
+source: https://docs.navattic.com/changelog
+description: >
+  Navattic runs a public Atlassian-Statuspage status page with a machine-readable
+  status API, and a monthly product-updates changelog going back to March 2023.
+  It does NOT publish a versioning policy, a dated deprecation policy, Sunset or
+  Deprecation header support, or an SLA — only an informal commitment on the
+  webhook integration to give notice before breaking changes.
+versioning:
+  scheme: none published
+  current: null
+  docs: null
+  note: >
+    No API version appears in any URL or header. The MCP endpoint is unversioned
+    (/api/mcp) and the website OpenAPI declares info.version 1.0.0 with no
+    version path segment.
+deprecation:
+  policy_url: null
+  formal_policy: false
+  sunset_header: false
+  deprecation_header: false
+  commitment: >
+    "Navattic strives to minimize the changes to the Webhook integration, and if
+    necessary will provide ample notice for any breaking changes."
+    (https://docs.navattic.com/integrations/webhook) — a stated intent with no
+    notice window, no deprecation calendar and no machine-readable signal, so it
+    is recorded here but no Deprecation pointer is emitted for it.
+sla:
+  url: null
+  uptime_target: null
+  note: No published uptime commitment. Enterprise support terms are contract-only.
+status_page:
+  url: https://status.navattic.com
+  platform: Atlassian Statuspage
+  machine_readable:
+    - {url: 'https://status.navattic.com/api/v2/status.json', status: 200}
+    - {url: 'https://status.navattic.com/api/v2/summary.json', status: 200}
+    - {url: 'https://status.navattic.com/history.rss', status: 200}
+  observed_state: All Systems Operational
+  observed_on: '2026-08-13'
+  components_tracked: true
+  incident_history: true
+  subscribe: true
+changelog:
+  url: https://docs.navattic.com/changelog
+  cadence: monthly
+  earliest_entry: March 2023
+  latest_entry: June 2026
+  detail: changelog/navattic-changelog.yml
+credential_lifecycle:
+  personal_access_tokens:
+    expirations_days: [7, 30, 60, 90, 180]
+    auto_expire: true
+    max_active_per_user: 25
+    revocation_endpoint: https://app.navattic.com/api/mcp/oauth/revoke
+    note: >
+      The one place Navattic does publish a hard lifecycle: tokens expire
+      automatically and must be recreated. Agents holding a PAT will break on a
+      fixed schedule.
+feature_lifecycle:
+  beta_signals:
+    - {feature: 'Navattic MCP server', first_announced: '2026-04', stage_at_announcement: Beta, source: 'https://docs.navattic.com/changelog'}
+    - {feature: 'Navattic MCP', announced: '2026-05', note: 'general availability announcement'}
+    - {feature: 'Launchpad MCP', announced: '2026-06'}
+  plan_gating:
+    - {feature: 'MCP server', requirement: 'Startup plan and above'}
+    - {feature: 'Audit logs', requirement: 'Enterprise plans'}
+deprecated_operations: []
+x-evidence:
+  - {url: 'https://status.navattic.com/api/v2/status.json', status: 200}
+  - {url: 'https://status.navattic.com/', status: 200}
+  - {url: 'https://docs.navattic.com/changelog', status: 200}
+  - {url: 'https://www.navattic.com/roadmap', status: 404, note: 'no public roadmap'}

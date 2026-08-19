@@ -1,3 +1,21 @@
+generated: '2026-08-13'
+method: searched
+source: https://docs.navattic.com/integrations/webhook
+limit_count: 0
+limit_note: >
+  Zero numeric rate limits are published. Re-searched 2026-08-13 across the
+  docs, the MCP server page and the OAuth metadata: no request-per-window figure
+  is documented for any surface, and no RateLimit-* / X-RateLimit-* /
+  Retry-After header is documented or observable on an anonymous response (the
+  MCP endpoint answers 401 with no rate-limit headers at all). The only hard,
+  published quantitative caps Navattic states are credential quotas, not request
+  limits — 25 active Personal Access Tokens per user, and token lifetimes of
+  7/30/60/90/180 days.
+response_headers_documented: []
+exhaustion_status_code: not documented
+credential_quotas:
+  - {name: Personal Access Tokens per user, limit: 25, scope: per user per workspace, source: 'https://docs.navattic.com/workspace/mcp-server'}
+  - {name: Personal Access Token lifetime, limit: '7, 30, 60, 90 or 180 days', scope: per token, source: 'https://docs.navattic.com/workspace/mcp-server'}
 name: Navattic Rate Limits
 description: >
   Rate limiting information for the Navattic API and webhook delivery system.

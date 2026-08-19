@@ -1,0 +1,68 @@
+generated: '2026-08-13'
+method: derived
+source: mcp/navattic-mcp.yml + openapi/navattic-website-openapi.json
+description: >
+  The crosswalk exists to record a real and unusual divergence at Navattic: the
+  MCP server and the OpenAPI describe entirely disjoint surfaces. Every product
+  capability an agent can reach is MCP-only — Navattic publishes no REST API
+  reference for demos, flows, visitors or analytics — and the only published
+  OpenAPI operation is a health check on the marketing website. There is
+  therefore nothing to bind, and that emptiness is the finding.
+surfaces:
+  openapi:
+    file: openapi/navattic-website-openapi.json
+    title: Navattic marketing website
+    server: https://www.navattic.com
+    operations: 1
+    gated: false
+    note: >
+      Describes the public HTTP surface of www.navattic.com only. Its own
+      info.description says "Product APIs and MCP are hosted on
+      app.navattic.com".
+  mcp:
+    url: https://app.navattic.com/api/mcp
+    gated: true
+    note: >
+      tools/list returns 401 anonymously. Tool names and inputSchemas require an
+      authenticated workspace token, so no tool row can be written without
+      inventing it.
+  graphql:
+    present: false
+crosswalk: []
+mcp_only:
+  - tool: null
+    capability_group: ANALYTICS
+    reason: No public REST operation exists for demo analytics, visitors or company accounts.
+  - tool: null
+    capability_group: DEMO_BROWSING
+    reason: No public REST operation exists for listing projects, flows, steps or share links.
+  - tool: null
+    capability_group: DEMO_BUILDING
+    reason: No public REST operation exists for creating or editing flows, steps, buttons, beacons, media or voiceover.
+  - tool: null
+    capability_group: DEMO_MANAGEMENT
+    reason: No public REST operation exists for creating/renaming projects or creating share links.
+  - tool: null
+    capability_group: DEMO_PUBLISHING
+    reason: No public REST operation exists for publishing or archiving demos.
+  - tool: null
+    capability_group: PERSONALIZATION
+    reason: No public REST operation exists for listing custom properties.
+  - tool: null
+    capability_group: LAUNCHPAD
+    reason: No public REST operation exists for Launchpad share links or interest flows.
+rest_only:
+  - capability: Service health
+    operations: [health]
+    note: GET /api/health on www.navattic.com; no MCP tool corresponds to it.
+coverage:
+  tools_named: 0
+  tools_bound: 0
+  mcp_only_capability_groups: 11
+  rest_operations_total: 1
+  rest_operations_with_tool: 0
+  binding_possible: false
+  reason_binding_impossible: >
+    The two surfaces do not overlap. Binding would require either an
+    authenticated tools/list introspection or a published product REST
+    reference; Navattic offers neither publicly.

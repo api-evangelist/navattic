@@ -1,0 +1,52 @@
+generated: '2026-08-13'
+method: searched
+probe: true
+source: https://docs.navattic.com/workspace/security
+url: https://trust.navattic.com/
+certifications:
+  - SOC 2 Type II
+  - GDPR
+description: >
+  Navattic runs a trust center at https://trust.navattic.com/ and links to it
+  from its documentation as the place to get certifications, security
+  documentation and vendor-questionnaire support. The certifications recorded
+  here are named in Navattic's own documentation; they were NOT read off the
+  trust center itself, because that page renders client-side and returns no
+  certification text to a non-JS fetch.
+evidence:
+  - source: https://docs.navattic.com/workspace/security
+    kind: docs security page
+    http_status: 200
+    quote: >
+      "Current certifications — including SOC 2 Type II and GDPR compliance —
+      are listed on the Navattic Trust Center."
+  - source: https://trust.navattic.com/
+    kind: trust center
+    http_status: 200
+    keywords: []
+    note: >
+      Reachable but JS-rendered — a plain fetch returns only the "Navattic Trust
+      Center" heading, which is why the automated probe
+      (probe-security-programs.py) recorded trust=none. Certifications above are
+      sourced from the docs instead.
+contact:
+  - success@navattic.com
+documents:
+  available_on_request: true
+  note: >
+    The docs direct infosec teams to the trust center to download security
+    reports and policies, or to email success@navattic.com for custom security
+    materials and vendor questionnaires. Whether an NDA gate applies could not
+    be determined without JS.
+security_posture_documented:
+  data_capture: >
+    Demos are static HTML/media snapshots of the customer's application —
+    Navattic holds no live connection to the customer's product or its
+    underlying data, so demo visitors never touch the real application.
+  content_redaction: [blur tool, text edit/replace, per-capture deletion]
+  demo_access_controls: [link expiration, password protection, email domain restriction, form gating, revoke access]
+  workspace_controls: [SSO, SCIM directory sync, audit logs (Enterprise), custom domains]
+  roles: [Admin, Builder, Rep]
+  ai_data_use: >
+    "Navattic does not use your demo content to train AI models" — consistent
+    with the Content-Signal ai-train=no published in robots.txt.

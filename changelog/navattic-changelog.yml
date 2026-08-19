@@ -1,0 +1,72 @@
+generated: '2026-08-13'
+method: searched
+source: https://docs.navattic.com/changelog
+description: >
+  Navattic publishes a monthly "Product updates" changelog on its documentation
+  site, unbroken from March 2023 through June 2026 (40 monthly entries). It is
+  product-release notes, not an API changelog: entries are grouped by month with
+  no version numbers, no breaking-change flags and no per-endpoint detail. The
+  recent window is captured below.
+scheme:
+  versioning: none — entries are labelled by calendar month
+  current_version: null
+  breaking_change_flags: false
+  rss_or_json_feed: false
+  in_app: 'Changelog surfaced in-app since June 2026'
+entry_count_published: 40
+earliest_entry: '2023-03'
+latest_entry: '2026-06'
+entries:
+  - date: '2026-06'
+    version: null
+    breaking: false
+    highlights:
+      - Voiceover improvements — custom pronunciations, speaking-rate controls, workspace default voice per language
+      - Media captures in sandbox demos
+      - Agent Demo avatar improvements
+      - Agent Demo qualification outcomes mapped to any CRM custom property
+      - Launchpad MCP
+      - Changelog in app
+  - date: '2026-05'
+    version: null
+    breaking: false
+    highlights:
+      - Workspace Capture Collections
+      - Navattic MCP (general availability)
+      - Upload Content
+      - Voiceover Defaults
+      - Team-level Permissions
+  - date: '2026-04'
+    version: null
+    breaking: false
+    highlights:
+      - Navattic MCP server (Beta)
+      - Capture translation
+      - Narrated demos
+      - Document export as PDF
+  - date: '2026-03'
+    version: null
+    breaking: false
+    highlights:
+      - Video Controls in Single Step View
+      - HubSpot on Sales & Pipeline Impact Dashboards
+      - Workspace Knowledge for Copilot
+  - date: '2026-02'
+    version: null
+    breaking: false
+    highlights:
+      - Single-Step Demo View
+      - Mobile Zoom
+  - date: '2026-01'
+    version: null
+    breaking: false
+    highlights:
+      - Copilot Review
+      - Highspot Integration
+api_relevant_entries:
+  - {date: '2026-04', event: 'MCP server shipped in Beta — the first machine-readable product surface'}
+  - {date: '2026-05', event: 'MCP server general availability'}
+  - {date: '2026-06', event: 'Launchpad MCP — Launchpad capabilities exposed to agents'}
+x-evidence:
+  - {url: 'https://docs.navattic.com/changelog', status: 200}
+  - {url: 'https://docs.navattic.com/changelog/index.md', status: 200, note: '1411 lines, 40 <Update label="..."> blocks'}

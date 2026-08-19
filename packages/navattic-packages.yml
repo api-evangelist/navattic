@@ -1,0 +1,77 @@
+generated: '2026-08-13'
+method: searched
+source: registry.npmjs.org, pypi.org, github.com/Navattic, https://docs.navattic.com/share/embed
+description: >
+  Navattic ships NO API client SDK in any language. What it does publish is a
+  first-party npm component library and two unpinned CDN browser bundles that
+  power demo embeds and visitor tracking. Registries probed with no first-party
+  result: PyPI, RubyGems, Packagist, crates.io, NuGet, Maven Central,
+  pkg.go.dev. The GitHub organization github.com/Navattic exists but has zero
+  public repositories.
+packages:
+  - language: javascript
+    registry: npm
+    name: "@navattic/compass-ui"
+    url: https://www.npmjs.com/package/@navattic/compass-ui
+    install: npm install @navattic/compass-ui
+    official: true
+    version: 1.0.9
+    published: '2025-12-18'
+    release_count: 10
+    kind: ui-component-library
+    homepage: https://ui.navattic.com/
+    note: >
+      Navattic's own design-system components (Storybook at ui.navattic.com).
+      First-party by scope ownership, but it is NOT an API client — it wraps no
+      Navattic endpoint. Last release predates the April 2026 MCP launch by four
+      months.
+  - language: javascript
+    registry: cdn
+    name: navattic.js
+    url: https://js.navattic.com/navattic.js
+    install: '<script src="https://js.navattic.com/navattic.js"></script>'
+    official: true
+    version: null
+    published: null
+    size_bytes: 458593
+    kind: browser-tracking-script
+    docs: https://docs.navattic.com/tracking/navattic-js
+    note: >
+      version null because the distribution is UNPINNED — the URL carries no
+      version segment and no registry metadata endpoint exists for it, so a
+      consumer cannot tell which build they are loading either. Checked, nothing
+      to record. Exposes navattic.identify() and navattic.onEvent().
+  - language: javascript
+    registry: cdn
+    name: embeds.js
+    url: https://js.navattic.com/embeds.js
+    install: '<script src="https://js.navattic.com/embeds.js"></script>'
+    official: true
+    version: null
+    published: null
+    size_bytes: 36937
+    kind: browser-embed-loader
+    docs: https://docs.navattic.com/share/embed
+    note: >
+      Unpinned CDN distribution, same as navattic.js — no version in the URL and
+      no metadata endpoint. Drives data-navattic-open / data-navattic-title
+      pop-up embeds.
+registries_probed:
+  - {registry: npm, query: 'scope:navattic + text:navattic', result: '@navattic/compass-ui only'}
+  - {registry: pypi, package: navattic, status: 404}
+  - {registry: pypi, package: navattic-sdk, status: 404}
+  - {registry: github, org: Navattic, public_repos: 0}
+sdk_assessment:
+  api_client_sdks: 0
+  note: >
+    No SDKs pointer is emitted for this repo. Navattic publishes no client
+    library for its API — the only callable surface is the MCP server, which is
+    reached by any MCP client over HTTP with no vendor library, and there is no
+    REST client to wrap. Claiming an SDK here would credit Navattic with
+    ergonomics it does not ship.
+x-evidence:
+  - {url: 'https://registry.npmjs.org/@navattic%2Fcompass-ui', status: 200}
+  - {url: 'https://js.navattic.com/navattic.js', status: 200}
+  - {url: 'https://js.navattic.com/embeds.js', status: 200}
+  - {url: 'https://api.github.com/orgs/Navattic/repos', status: 200, note: 'empty array'}
+  - {url: 'https://pypi.org/pypi/navattic/json', status: 404}

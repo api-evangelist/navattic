@@ -1,0 +1,113 @@
+# Navattic Documentation
+
+## Docs
+
+- [Welcome to Navattic](https://docs.navattic.com/index.md): Build interactive demos for marketing, growth, and sales.
+- [Build your first demo](https://docs.navattic.com/build/demo.md): Learn how to build your first demo with Navattic.
+- [Creating flows](https://docs.navattic.com/build/flows.md): Demos are composed of step-by-step flows.
+- [Web captures](https://docs.navattic.com/build/captures/web.md): Interactive copies of your application.
+- [Media captures](https://docs.navattic.com/build/captures/media.md): Images, videos, and GIFs of your desktop or mobile app.
+- [Personalizing captures](https://docs.navattic.com/build/captures/personalization.md): Customize text, images, colors, and styles in captures using custom properties.
+- [Checklist demos](https://docs.navattic.com/build/checklist.md): Learn how to create and use Checklists in your demos.
+- [Customize your theme](https://docs.navattic.com/build/themes.md): Learn how to customize your theme with your company brand.
+- [Responsive strategies](https://docs.navattic.com/build/responsive.md): Learn how to make your demos look great on every screen size.
+- [Demos on mobile](https://docs.navattic.com/build/mobile.md): Configure how your demos appear on mobile devices and smaller screens.
+- [Personalized demos](https://docs.navattic.com/demos/personalized.md): Make demos personalized by adding user and account properties.
+- [Multilingual demos](https://docs.navattic.com/demos/multilingual.md): Learn how to translate your Navattic demos into multiple languages.
+- [Interest demos](https://docs.navattic.com/demos/interest.md): Unlock a powerful insight - what features your visitors are interested in.
+- [Offline demos](https://docs.navattic.com/demos/offline.md): Present Navattic demos offline from your own device.
+- [Narrated demos](https://docs.navattic.com/demos/narrated.md): Create demos with synchronized audio narration using Copilot.
+- [Sandbox demos](https://docs.navattic.com/demos/sandbox.md): Create a lightweight sandbox that your sales team can use live on calls.
+- [Demo builder](https://docs.navattic.com/build/demo-builder.md): Create and edit interactive demos in the Demo builder.
+- [Launchpad](https://docs.navattic.com/launchpad-overview.md): Streamlined access to demos for sales teams.
+- [Embed your demo](https://docs.navattic.com/share/embed.md): Embed your demo on your marketing website or product.
+- [Exporting a demo](https://docs.navattic.com/share/export.md): Export your demo as a PDF, GIF, or MP4 video.
+- [Analyze performance](https://docs.navattic.com/analyze/index.md): Understand the performance of your product demos and visitor behavior.
+- [Generate](https://docs.navattic.com/copilot/generate.md): Instantly spin up demos by clicking through your product.
+- [Prompt](https://docs.navattic.com/copilot/prompt.md): Make bulk changes to step names, content, CTAs, and more using natural language.
+- [Review](https://docs.navattic.com/copilot/review.md): Get an AI demo score based on highest-performing benchmarks and one-click apply suggestions.
+- [Ask Navattic](https://docs.navattic.com/copilot/ask-navattic.md): Ask questions about your workspace data and get AI-powered answers directly in the dashboard.
+- [Integrations overview](https://docs.navattic.com/integrations/overview.md): Connect Navattic with your CRM, marketing automation, and analytics tools.
+- [HubSpot](https://docs.navattic.com/integrations/hubspot.md): Connect your demos with HubSpot to create records from Visitors.
+- [Salesforce](https://docs.navattic.com/integrations/salesforce.md): Sync demo engagement data to Leads and Contacts for better sales insights.
+- [Marketo](https://docs.navattic.com/integrations/marketo.md): Sync demo engagement data and form submissions for automated lead nurturing.
+- [Pardot](https://docs.navattic.com/integrations/pardot.md): Track prospect engagement and automate follow-up.
+- [Segment](https://docs.navattic.com/integrations/segment.md): Send demo events to Segment for advanced analytics and data routing.
+- [ZoomInfo](https://docs.navattic.com/integrations/zoominfo.md): Enrich visitor and account data by connecting Navattic demo engagement with ZoomInfo.
+- [Slack](https://docs.navattic.com/integrations/slack.md): Get real-time notifications in Slack when prospects engage with your demos.
+- [Webhook](https://docs.navattic.com/integrations/webhook.md): Send demo events to custom webhooks for flexible integration with any system.
+- [Playbooks](https://docs.navattic.com/integrations/playbooks.md): Automate workflows and trigger actions based on demo engagement.
+- [Field mappings](https://docs.navattic.com/integrations/field-mappings.md): Configure how Navattic syncs data to your CRM integrations.
+- [Install Navattic JS](https://docs.navattic.com/tracking/navattic-js/index.md): Install and configure the Navattic JS tracking script.
+- [Subscribe to Events](https://docs.navattic.com/tracking/navattic-js/subscribe-to-events/index.md): Connect to tracking scripts you already have installed.
+- [HubSpot Forms](https://docs.navattic.com/tracking/navattic-js/subscribe-to-events/hubspot-forms.md): Automatically populate HubSpot forms with visitor data from demo interactions.
+- [Marketo Forms](https://docs.navattic.com/tracking/navattic-js/subscribe-to-events/marketo-forms.md): Enhance Marketo forms with demo engagement data for better lead qualification.
+- [Google Analytics (GA4)](https://docs.navattic.com/tracking/navattic-js/subscribe-to-events/ga4.md): Track demo events in Google Analytics 4 for comprehensive user behavior analysis.
+- [Google Tag Manager](https://docs.navattic.com/tracking/navattic-js/subscribe-to-events/google-tag-manager.md): Integrate Navattic events with Google Tag Manager for flexible tracking configurations.
+- [Tracking scripts](https://docs.navattic.com/tracking/tracking-scripts/index.md): Add third-party tracking scripts to your demos.
+- [Drift](https://docs.navattic.com/tracking/tracking-scripts/drift.md): Add a chat widget for real-time customer conversations.
+- [Qualified](https://docs.navattic.com/tracking/tracking-scripts/qualified.md): Deploy chatbots for automated demo engagement.
+- [6sense](https://docs.navattic.com/tracking/tracking-scripts/6sense.md): Add 6sense web tags to track anonymous demo visitors and identify buying signals.
+- [Demandbase](https://docs.navattic.com/tracking/tracking-scripts/demandbase.md): Add the Demandbase script to track anonymous demo visitors and account activity.
+- [Identifying visitors](https://docs.navattic.com/tracking/identify/visitors.md): Learn about who is viewing your demos.
+- [Identifying accounts](https://docs.navattic.com/tracking/identify/accounts.md): Track visitors at the company level.
+- [Navattic Forms](https://docs.navattic.com/tracking/forms/index.md): Capture and track visitor information through forms in your demos
+- [Custom properties](https://docs.navattic.com/tracking/forms/properties.md): Create and manage custom form fields to capture specific visitor information
+- [Workspace Organization](https://docs.navattic.com/workspace/workspace-organization.md): How to structure, manage, and govern a growing demo library in Navattic.
+- [Workspace captures](https://docs.navattic.com/workspace/workspace-captures.md): Share capture collections across multiple demos from a central workspace library.
+- [Teams](https://docs.navattic.com/workspace/teams.md): Organize workspace members into teams and control their access to demos.
+- [Boards](https://docs.navattic.com/workspace/boards.md): Organize your product demos onto shared views.
+- [Labels](https://docs.navattic.com/workspace/labels.md): Add labels to your demos to categorize them and make them easier to find.
+- [Approval Workflow](https://docs.navattic.com/workspace/approval-workflow.md): Require approval before publishing changes to demos.
+- [Security & privacy](https://docs.navattic.com/workspace/security.md): An overview of Navattic's security posture, data handling practices, and tools for protecting sensitive information in demos.
+- [SSO](https://docs.navattic.com/workspace/sso.md): Require members to authenticate using an identity provider, such as Okta.
+- [Directory Sync](https://docs.navattic.com/workspace/directory-sync.md): Automatically provision users using an identity provider, such as Okta.
+- [MCP server](https://docs.navattic.com/workspace/mcp-server.md): Connect AI coding agents to your Navattic workspace using the Model Context Protocol.
+- [FAQs](https://docs.navattic.com/help/faqs.md): Find answers to frequently asked questions about web captures, media captures, and common issues.
+- [Best practices](https://docs.navattic.com/help/best-practices.md): Tips for creating interactive demos that convert visitors into customers.
+- [Navattic Basics](https://docs.navattic.com/help/basics.md): Interactive demos and video walkthroughs of Navattic basics.
+- [Capture Troubleshooting](https://docs.navattic.com/build/captures/troubleshooting.md): Tips and solutions for working with web captures
+- [Product updates](https://docs.navattic.com/changelog/index.md): New product updates and announcements
+- [Navattic Use Cases](https://docs.navattic.com/use-cases/index.md): Create demos that delight at every stage of the customer journey.
+- [Website demos](https://docs.navattic.com/use-cases/website-demos.md): Embed interactive demos on your website to increase conversions and qualify leads.
+- [Demo center](https://docs.navattic.com/use-cases/demo-center.md): Create a centralized hub for all your product demos to drive self-service exploration.
+- [Feature highlights](https://docs.navattic.com/use-cases/feature-highlights.md): Showcase specific features with focused, interactive product demos.
+- [Conferences](https://docs.navattic.com/use-cases/conferences.md): Stand out at trade shows and conferences with interactive demos that prospects can explore.
+- [Sales outreach](https://docs.navattic.com/use-cases/sales-outreach.md): Increase response rates by including personalized demos in your sales outreach.
+- [Sales leave-behind](https://docs.navattic.com/use-cases/sales-leave-behind.md): Provide prospects with interactive demos they can share internally after sales calls.
+- [Sales enablement](https://docs.navattic.com/use-cases/sales-enablement.md): Empower your sales team with interactive demos to accelerate deal cycles.
+- [In-app demos](https://docs.navattic.com/use-cases/in-app-demos.md): Embed demos directly within your application for contextual user guidance.
+- [Customer onboarding](https://docs.navattic.com/use-cases/training.md): Create demos to onboard users and showcase best practices.
+- [Academy demos](https://docs.navattic.com/use-cases/academy.md): Use interactive demos in Academies to help customers master essential workflows or train on advanced features.
+- [Launchpad](https://docs.navattic.com/launchpad/index.md): Streamlined access to demos for sales teams.
+- [Quick Start Guide](https://docs.navattic.com/launchpad/get-started/quick-start-guide.md): Get up and running with Launchpad in minutes.
+- [Prepare your demos](https://docs.navattic.com/launchpad/build/prepare.md): Select your gold-standard demos to showcase to your sales team.
+- [Demos for sales teams](https://docs.navattic.com/launchpad/demos/for-sellers.md): Learn how to create purpose-built demos for your sales team
+- [Demo Library](https://docs.navattic.com/launchpad/demos/library.md): Access and organize all your demos in one unified library - standard demos, custom flows, and videos.
+- [Personalized demos](https://docs.navattic.com/launchpad/demos/personalized.md): Make demos personalized by adding user and account properties.
+- [Custom demos](https://docs.navattic.com/launchpad/demos/custom.md): Enable your sales team to assemble custom demos from pre-built templates.
+- [Interest demos](https://docs.navattic.com/launchpad/demos/interest.md): Unlock a powerful insight - what features your prospects are interested in.
+- [Offline demos](https://docs.navattic.com/launchpad/demos/offline.md): Present Navattic demos offline from your own device.
+- [Sandbox demos](https://docs.navattic.com/launchpad/demos/sandbox.md): Learn how to quickly build a lightweight sandbox demo.
+- [Sharing demos](https://docs.navattic.com/launchpad/share/demos.md): Sharing demos from Launchpad.
+- [Present demos](https://docs.navattic.com/launchpad/share/present.md): Share and present Navattic demos during live calls
+- [When to share demos](https://docs.navattic.com/launchpad/share/when-to-share.md): Tips and best practices for when to share demos in the sales process.
+- [Customize share defaults](https://docs.navattic.com/launchpad/share/defaults.md): Manage the settings for how reps share demos
+- [Outbound](https://docs.navattic.com/launchpad/use-cases/outbound.md): Send demos in outbound email to book more meetings.
+- [Pre-call discovery](https://docs.navattic.com/launchpad/use-cases/pre-call-discovery.md): Learn about what the prospect is interested in before the first call.
+- [Post-call followup](https://docs.navattic.com/launchpad/use-cases/post-call.md): Send relevant followup demos to prospects after the call.
+- [Launchpad Integrations](https://docs.navattic.com/launchpad/integrations/overview.md): Connect Launchpad with your CRM and email tools.
+- [Salesforce](https://docs.navattic.com/launchpad/integrations/salesforce.md): Automations to operationalize your sales process.
+- [HubSpot](https://docs.navattic.com/launchpad/integrations/hubspot.md): Connect your demos with HubSpot to create records from Visitors.
+- [Seismic](https://docs.navattic.com/launchpad/integrations/seismic.md): Access and share Navattic demos directly from Seismic.
+- [Highspot](https://docs.navattic.com/launchpad/integrations/highspot.md): Create and share demos from within Highspot Digital Sales Rooms.
+- [Front](https://docs.navattic.com/launchpad/integrations/front.md): Connect your demos with Front to send demos directly within Front conversations.
+- [Outreach](https://docs.navattic.com/launchpad/integrations/outreach.md): Create and share demos from within Outreach.
+- [Salesloft](https://docs.navattic.com/launchpad/integrations/salesloft.md): Create and share demos from within Salesloft.
+- [Gmail](https://docs.navattic.com/launchpad/integrations/gmail.md): Create and share demos from within Gmail.
+- [Outlook](https://docs.navattic.com/launchpad/integrations/outlook.md): Create and share demos from within Outlook.
+- [Gong](https://docs.navattic.com/launchpad/integrations/gong.md): Connect your demos with Gong to track demo engagement and send demos directly within Gong Engage.
+
+## Optional
+
+- [Academy](https://academy.navattic.com)

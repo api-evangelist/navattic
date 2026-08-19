@@ -1,0 +1,161 @@
+generated: '2026-08-13'
+method: searched
+status: published
+source: https://docs.navattic.com/workspace/mcp-server
+description: >
+  Navattic ships a first-party, hosted remote MCP server. It is the company's
+  primary machine-readable product surface — there is no public REST API
+  reference — and it is reachable by any MCP client that can complete an OAuth
+  authorization-code flow or present a Personal Access Token as a bearer token.
+deployment:
+  mode: remote
+  endpoint: https://app.navattic.com/api/mcp
+  auth: oauth
+  verified: probed
+  note: >
+    Remote only. Navattic publishes no npx/stdio package and no local install
+    command; every documented client (ChatGPT, Claude Desktop, Claude Code,
+    Codex, Cursor, VS Code, Windsurf, IBM Bob, Gemini Enterprise, Microsoft
+    Copilot Studio) is configured with the same https URL. Both auth paths
+    terminate at that URL: OAuth for ChatGPT/Claude/Gemini Enterprise, and a
+    workspace Personal Access Token sent as `Authorization: Bearer <token>` for
+    the rest.
+server:
+  name: navattic
+  transport: http
+  protocol: streamable-http
+  url: https://app.navattic.com/api/mcp
+  availability: Startup plan and above
+  install_command: >
+    claude mcp add --transport http navattic https://app.navattic.com/api/mcp
+authentication:
+  methods:
+    - kind: oauth2
+      flow: authorization_code
+      pkce: true
+      dynamic_client_registration: true
+      authorization_endpoint: https://app.navattic.com/api/mcp/oauth/authorize
+      token_endpoint: https://app.navattic.com/api/mcp/oauth/token
+      registration_endpoint: https://app.navattic.com/api/mcp/oauth/register
+      revocation_endpoint: https://app.navattic.com/api/mcp/oauth/revoke
+      metadata: well-known/navattic-oauth-authorization-server.json
+      clients: [ChatGPT, Claude Desktop, Claude Code, Gemini Enterprise]
+    - kind: bearer
+      credential: Personal Access Token
+      created_in: Settings > Workspace > Access Tokens (Admins only)
+      max_active_tokens_per_user: 25
+      expirations_days: [7, 30, 60, 90, 180]
+      clients: [Cursor, VS Code, Windsurf, Codex, IBM Bob, Microsoft Copilot Studio]
+  protected_resource_metadata: well-known/navattic-oauth-protected-resource.json
+  isolation: >
+    All operations are scoped to the authenticated workspace; the docs state an
+    agent cannot reach another workspace's data even with a valid resource ID
+    from that workspace.
+scopes:
+  source: https://app.navattic.com/.well-known/oauth-authorization-server
+  detail: scopes/navattic-scopes.yml
+  supported:
+    - ANALYTICS
+    - DEMO_BROWSING
+    - DEMO_BUILDING
+    - DEMO_MANAGEMENT
+    - DEMO_PUBLISHING
+    - PERSONALIZATION
+    - LAUNCHPAD
+    - AGENT_DEMOS
+    - AGENT_ENVIRONMENTS
+    - WORKSPACE_MANAGEMENT
+    - NOTIFICATIONS
+tools:
+  listed: false
+  note: >
+    NOT RECORDED — and deliberately not invented. `tools/list` on
+    https://app.navattic.com/api/mcp returns HTTP 401
+    {"error":"Unauthorized. Provide a valid access token as a Bearer token in
+    the Authorization header."} anonymously, so the live tool names and
+    inputSchemas require an authenticated workspace token to introspect. The
+    docs describe capabilities in prose grouped by scope rather than naming
+    tools, and Navattic publishes no tool manifest, so no tool names exist that
+    could be captured honestly. The capability groups below are what the
+    provider documents; they are NOT tool names.
+capability_groups:
+  - scope: ANALYTICS
+    required_role: Viewer or above
+    documented_capabilities: >
+      View demo engagement metrics and visitor data — views, session counts,
+      click-through rates across active demos; drill into individual visitors
+      and company accounts including session history, demos viewed and
+      firmographics; filter by demo, company, location, industry, employee count
+      and custom properties.
+  - scope: DEMO_BROWSING
+    required_role: Viewer or above
+    documented_capabilities: >
+      List projects, find demos by name or keyword, read flow step content, list
+      a demo's share links with their public URLs, check for unpublished draft
+      changes, read the workspace product knowledge base, browse available
+      captures.
+  - scope: DEMO_BUILDING
+    required_role: Builder or above
+    documented_capabilities: >
+      Create new flows in an existing project and edit existing flows — steps
+      (add/remove/move/update, tooltip text, overlay style, progress
+      indicators), buttons (labels, URLs, click actions), navigation and exit
+      views, beacons and click triggers, media and voiceover, presenter
+      settings. Copy captures between demos and duplicate flows. Edits are
+      validated and applied atomically.
+  - scope: DEMO_MANAGEMENT
+    required_role: Builder or above
+    documented_capabilities: Create and rename projects; create share links.
+  - scope: DEMO_PUBLISHING
+    required_role: Builder or above
+    documented_capabilities: >
+      Publish demos (draft changes become immediately visible on all share links
+      and embeds) and archive projects (affects the demo's live URLs). Some
+      workspaces restrict publishing to the demo creator or admins.
+  - scope: PERSONALIZATION
+    required_role: Viewer or above
+    documented_capabilities: List custom properties set up for visitor personalization.
+  - scope: LAUNCHPAD
+    required_role: Viewer or above (Launchpad workspaces only)
+    documented_capabilities: >
+      Browse, create and look up 1-1 Launchpad share links with recipient and
+      engagement data; search interest flows by name or description.
+  - scope: AGENT_DEMOS
+    required_role: unstated
+    documented_capabilities: >
+      Advertised in the published OAuth scope list but not described on the MCP
+      docs page. Recorded as declared-not-documented rather than guessed at.
+  - scope: AGENT_ENVIRONMENTS
+    required_role: unstated
+    documented_capabilities: Advertised in the published OAuth scope list; not described in the docs.
+  - scope: WORKSPACE_MANAGEMENT
+    required_role: unstated
+    documented_capabilities: Advertised in the published OAuth scope list; not described in the docs.
+  - scope: NOTIFICATIONS
+    required_role: unstated
+    documented_capabilities: Advertised in the published OAuth scope list; not described in the docs.
+resources:
+  note: Available to every connected agent regardless of scope, per the docs.
+  items:
+    - name: Workspace overview
+      description: Current project count, member count and plan type.
+    - name: Navattic concepts
+      description: Reference guide to the Navattic data model (projects, flows, steps, share links).
+    - name: Flow editing guide
+      description: >
+        Explains the read-then-edit loop, step and button locators, the
+        entity_tag concurrency token, and how index positions shift after
+        structural changes.
+concurrency:
+  token: entity_tag
+  model: optimistic concurrency — read the flow, pass the version token with the edit
+  on_conflict: edit rejected if the flow changed since the read
+  batching: all edits in a batch apply atomically; if any action fails, nothing is saved
+  reindexing: step indices shift after inserting/moving/removing a step; re-read before the next batch
+x-evidence:
+  - {url: 'https://app.navattic.com/api/mcp', method: 'POST tools/list', status: 401, note: 'anonymous introspection gated'}
+  - {url: 'https://app.navattic.com/api/mcp', method: 'POST initialize', status: 401}
+  - {url: 'https://app.navattic.com/.well-known/oauth-protected-resource', status: 200}
+  - {url: 'https://app.navattic.com/.well-known/oauth-authorization-server', status: 200}
+  - {url: 'https://www.navattic.com/.well-known/api-catalog', status: 200, note: 'anchors https://app.navattic.com/api/mcp'}
+  - {url: 'https://docs.navattic.com/workspace/mcp-server.md', status: 200}

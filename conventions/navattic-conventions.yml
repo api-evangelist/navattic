@@ -1,0 +1,113 @@
+generated: '2026-08-13'
+method: searched
+source: https://docs.navattic.com/workspace/mcp-server
+also_source:
+  - https://docs.navattic.com/integrations/webhook
+  - openapi/navattic-website-openapi.json
+description: >
+  Cross-cutting request/response semantics for Navattic's machine-readable
+  surfaces. Navattic has no public REST product API, so the conventions that
+  matter to an agent are the MCP server's — its auth style, its optimistic
+  concurrency model, and its atomic batch semantics — plus the webhook envelope
+  on the way out.
+authentication:
+  style: OAuth 2.1 authorization-code with PKCE, or bearer Personal Access Token
+  header: 'Authorization: Bearer <token>'
+  detail: authentication/navattic-authentication.yml
+  scopes: scopes/navattic-scopes.yml
+  isolation: Every operation is scoped to the authenticated workspace
+idempotency:
+  supported: false
+  idempotency_key_header: null
+  note: >
+    Navattic documents NO idempotency key. Retrying a write is not made safe by
+    a client-supplied key. What it documents instead is optimistic concurrency
+    (see `concurrency` below), which is a different guarantee: it prevents lost
+    updates from a stale read, but it does not deduplicate a repeated request.
+    Recorded as unsupported rather than folded in, so this file is not read as
+    an idempotency contract.
+concurrency:
+  model: optimistic concurrency control
+  token: entity_tag
+  flow: >
+    Read the flow document first to obtain the step structure and a version
+    token, then pass that version token with the edit request.
+  on_conflict: >
+    If the flow changed since the read, the edit is rejected — the write is not
+    applied.
+  atomicity: >
+    All edits in a batch apply atomically. If any action in the batch fails,
+    nothing is saved.
+  reindexing: >
+    After any structural change (inserting, moving or removing a step) the step
+    indices shift, so the flow must be re-read before the next batch.
+  source: https://docs.navattic.com/workspace/mcp-server
+pagination:
+  documented: false
+  note: >
+    No pagination contract is published. The MCP tool schemas are auth-gated, so
+    whether list operations page and how is not observable anonymously.
+filtering:
+  documented: true
+  note: >
+    Analytics reads can be filtered by demo, company, location, industry,
+    employee count and custom properties, per the MCP capability docs. The
+    parameter names are inside the gated tool schemas.
+identifiers:
+  format: cuid-style opaque strings
+  example_shape: clx8f2k1a0003abcd12345678
+  scope: Every object carries workspaceId; ids are unique within the workspace
+  stable_variants:
+    - {field: sharedId, object: endUser, note: 'Stable visitor identifier used across sessions (UUID form)'}
+    - {field: recordedStepCommonId, object: recordedEvent, note: 'Stable step identifier shared across demo versions'}
+timestamps:
+  format: ISO 8601 date-time strings
+  fields: [createdAt, updatedAt, closedAt, timestamp]
+numeric_encoding:
+  note: Large numeric values (e.g. estimatedAnnualRevenue, amountRaised) are transmitted as strings.
+versioning:
+  api_versioning: none published
+  content_versioning:
+    - {field: projectVersionId, note: 'Identifies the published demo version a visitor viewed'}
+    - {field: entity_tag, note: 'Per-flow version token used for concurrency control'}
+  publishing_model: >
+    Demos have a draft/published split. Publishing makes draft changes
+    immediately visible on every share link and embed; archiving affects the
+    demo's live URLs.
+error_envelope:
+  documented: false
+  observed:
+    - {surface: 'MCP https://app.navattic.com/api/mcp', status: 401, body: '{"error":"Unauthorized. Provide a valid access token as a Bearer token in the Authorization header."}', shape: 'flat {error: string}'}
+    - {surface: 'https://api.navattic.com/*', status: 404, body: '{"message":"Request unhandled"}', shape: 'flat {message: string}'}
+  rfc9457: false
+  detail: errors/navattic-problem-types.yml
+rate_limit_signaling:
+  documented: false
+  headers: []
+  detail: rate-limits/navattic-rate-limits.yml
+request_tracing:
+  request_id_header: none documented
+  note: >
+    Vercel edge headers (x-vercel-id) are observable on responses but are
+    infrastructure, not a documented tracing contract.
+webhooks:
+  envelope: '{eventType, timestamp, data}'
+  content_type: application/json
+  user_agent: navattic-tour
+  detail: asyncapi/navattic-webhooks.yml
+crawler_policy:
+  robots:
+    www.navattic.com: 'Allow: / with Content-Signal: ai-train=no, search=yes, ai-input=no'
+    app.navattic.com: 'Disallow: /'
+    api.navattic.com: 'Disallow: /'
+  note: >
+    Navattic publishes a Content Signals preference on the marketing host —
+    indexing for search is permitted, AI training and AI input are not. The
+    documentation host serves an llms.txt and an agent card, so the agent-facing
+    posture is deliberately split from the crawler-facing one.
+cross_links:
+  errors: errors/navattic-problem-types.yml
+  lifecycle: lifecycle/navattic-lifecycle.yml
+  authentication: authentication/navattic-authentication.yml
+  rate_limits: rate-limits/navattic-rate-limits.yml
+  data_model: data-model/navattic-data-model.yml

@@ -1,0 +1,135 @@
+generated: '2026-08-13'
+method: searched
+source: live probes + https://docs.navattic.com/workspace/security
+description: >
+  Which cross-cutting standards Navattic's published surfaces actually conform
+  to. The strong results are all on the agent/authorization side — RFC 8414,
+  RFC 9728, OAuth 2.1 with PKCE, RFC 9727 api-catalog, MCP, A2A, llms.txt and
+  Agent Skills — because that is where Navattic invested. The REST side is
+  essentially absent, and the error/consent side is unimplemented.
+standards:
+  - id: mcp
+    name: Model Context Protocol
+    conforms: true
+    evidence: >
+      First-party hosted server at https://app.navattic.com/api/mcp over
+      streamable HTTP; documented for 10 clients; anonymous initialize/tools/list
+      return a well-formed 401.
+  - id: oauth2
+    name: OAuth 2.0/2.1 authorization code
+    conforms: true
+    evidence: >
+      authorization_code + refresh_token grants, response_type code,
+      token_endpoint_auth_methods_supported ["none"] (public client), PKCE
+      advertised in code_challenge_methods_supported.
+  - id: rfc8414
+    name: OAuth 2.0 Authorization Server Metadata
+    conforms: true
+    evidence: 'https://app.navattic.com/.well-known/oauth-authorization-server returns 200 with issuer, authorization/token/registration/revocation endpoints and scopes_supported.'
+  - id: rfc9728
+    name: OAuth 2.0 Protected Resource Metadata
+    conforms: true
+    evidence: 'https://app.navattic.com/.well-known/oauth-protected-resource returns 200 with resource, authorization_servers, scopes_supported, bearer_methods_supported and resource_name.'
+  - id: rfc7591
+    name: OAuth 2.0 Dynamic Client Registration
+    conforms: true
+    evidence: registration_endpoint https://app.navattic.com/api/mcp/oauth/register advertised in the AS metadata.
+  - id: rfc7009
+    name: OAuth 2.0 Token Revocation
+    conforms: true
+    evidence: revocation_endpoint https://app.navattic.com/api/mcp/oauth/revoke advertised in the AS metadata.
+  - id: rfc6750
+    name: OAuth 2.0 Bearer Token Usage
+    conforms: true
+    evidence: 'bearer_methods_supported ["header"]; the 401 body instructs clients to send a bearer token in the Authorization header.'
+  - id: rfc9727
+    name: 'api-catalog: a well-known URI for a catalogue of API descriptions'
+    conforms: true
+    evidence: 'https://www.navattic.com/.well-known/api-catalog returns a 200 linkset with service-desc/service-doc/status items for two anchors.'
+  - id: openapi
+    name: OpenAPI 3.x
+    conforms: true
+    partial: true
+    evidence: >
+      OpenAPI 3.0.3 served at https://www.navattic.com/.well-known/openapi.json
+      — valid, but it describes the marketing website's health endpoint only,
+      not the product.
+  - id: a2a
+    name: A2A Agent Card
+    conforms: true
+    grade: near-conformant
+    evidence: 'https://docs.navattic.com/.well-known/agent-card.json — see a2a/navattic-a2a.yml for the grade and deviations.'
+  - id: agent-skills
+    name: Agent Skills
+    conforms: true
+    evidence: 'Provider-published skill at https://docs.navattic.com/.well-known/agent-skills/navattic/skill.md, advertised from the agent card.'
+  - id: llmstxt
+    name: llms.txt
+    conforms: true
+    evidence: 'https://docs.navattic.com/llms.txt returns 200 with a full H1 + link-list document; every doc page is also served as .md.'
+  - id: content-signals
+    name: Cloudflare Content Signals Policy
+    conforms: true
+    evidence: 'https://www.navattic.com/robots.txt carries "Content-Signal: ai-train=no, search=yes, ai-input=no".'
+  - id: scim2
+    name: SCIM 2.0
+    conforms: true
+    partial: true
+    evidence: >
+      Directory Sync provisions and deprovisions users via SCIM
+      (https://docs.navattic.com/workspace/directory-sync). It governs workspace
+      membership, not an exposed customer SCIM endpoint.
+  - id: saml-sso
+    name: SAML / IdP single sign-on
+    conforms: true
+    evidence: 'Workspace SSO against Okta/Azure AD (https://docs.navattic.com/workspace/sso).'
+  - id: soc2
+    name: SOC 2 Type II
+    conforms: true
+    evidence: 'Stated on https://docs.navattic.com/workspace/security and published at https://trust.navattic.com/.'
+  - id: gdpr
+    name: GDPR
+    conforms: true
+    evidence: 'Stated on https://docs.navattic.com/workspace/security and published at https://trust.navattic.com/.'
+  - id: rfc9116
+    name: 'security.txt'
+    conforms: false
+    evidence: '/.well-known/security.txt returns 404 on www, app, docs and api hosts.'
+  - id: rfc9457
+    name: Problem Details for HTTP APIs
+    conforms: false
+    evidence: 'Observed error bodies are flat {"error":…} and {"message":…}; no application/problem+json anywhere.'
+  - id: rfc8594
+    name: 'Sunset HTTP header'
+    conforms: false
+    evidence: No Sunset or Deprecation header support and no dated deprecation policy is published.
+  - id: rfc6585-ratelimit
+    name: RateLimit header fields
+    conforms: false
+    evidence: No RateLimit-* / X-RateLimit-* headers or published limits.
+  - id: asyncapi
+    name: AsyncAPI
+    conforms: false
+    evidence: >
+      No AsyncAPI document is served, though a complete webhook reference is
+      published (asyncapi/navattic-webhooks.yml).
+  - id: oidc
+    name: OpenID Connect Discovery
+    conforms: false
+    evidence: >
+      /.well-known/openid-configuration is 404 on every Navattic host. The 200
+      at academy.navattic.com belongs to Thinkific (issuer
+      courses.thinkific.com), not Navattic.
+  - id: graphql
+    name: GraphQL
+    conforms: false
+    evidence: No /graphql surface found on any host.
+  - id: grpc
+    name: gRPC / Protocol Buffers
+    conforms: false
+    evidence: No .proto published; the GitHub org has no public repositories.
+compliance_program:
+  published: true
+  url: https://trust.navattic.com/
+  certifications: [SOC 2 Type II, GDPR]
+  detail: security/navattic-trust-center.yml

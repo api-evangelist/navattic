@@ -1,0 +1,133 @@
+generated: '2026-08-13'
+method: derived
+source: asyncapi/navattic-webhooks.yml
+also_source:
+  - https://docs.navattic.com/integrations/webhook
+  - https://docs.navattic.com/workspace/mcp-server
+description: >
+  Derived entity graph. Navattic publishes no product OpenAPI to walk $refs
+  through, so this model is derived from the two places the object graph IS
+  spelled out field by field: the webhook payload reference (session, endUser,
+  companyAccount, recordedEvent, customPropertyValue) and the MCP server's
+  documented "Navattic concepts" resource (workspace, project, flow, step, share
+  link). Every entity and relationship below traces to a named field in one of
+  those references; nothing is invented to complete the diagram.
+identifier_format:
+  style: cuid-style opaque string
+  example: clx8f2k1a0003abcd12345678
+  note: >
+    Navattic uses no type prefixes on ids, so an id cannot be classified by
+    inspection — the field name carries the type. endUser.sharedId is the one
+    UUID-shaped identifier.
+entities:
+  - name: workspace
+    id_field: workspaceId
+    description: The tenant boundary. Every other entity carries workspaceId.
+    source: webhook payload + MCP workspace overview resource
+  - name: project
+    aka: demo
+    id_field: id
+    description: A demo. Contains flows; owns share links; can be published or archived.
+    fields_seen: [id, name]
+    source: webhook (recordedProjectId/recordedProjectName, mostRecentProjectId) + MCP demo management
+  - name: projectVersion
+    id_field: projectVersionId
+    description: A published version of a demo; what a visitor actually viewed.
+    fields_seen: [projectVersionId, projectLanguage]
+  - name: flow
+    id_field: flowId
+    description: A step-by-step narrative within a project.
+    fields_seen: [recordedFlowId, recordedFlowName]
+    concurrency_token: entity_tag
+  - name: step
+    id_field: recordedStepId
+    description: One screen in a flow, anchored to a capture.
+    fields_seen: [recordedStepId, recordedStepIndex, recordedStepCommonId, recordedStepName]
+    note: recordedStepCommonId is stable across demo versions; recordedStepIndex shifts on structural edits.
+  - name: capture
+    id_field: null
+    description: An interactive HTML snapshot or media asset a step is anchored to.
+    source: MCP demo building / docs build.captures
+    note: No id field appears in the published webhook payload.
+  - name: checklist
+    id_field: checklistId
+    description: A grouping of flows presented as tasks.
+    fields_seen: [recordedChecklistId, recordedChecklistName]
+  - name: task
+    id_field: recordedTaskId
+    description: One item within a checklist.
+    fields_seen: [recordedTaskId, recordedTaskName]
+  - name: interest
+    id_field: recordedInterestId
+    description: A tracked feature interest in an interest-driven demo.
+    fields_seen: [recordedInterestId, recordedInterestName]
+  - name: shareLink
+    id_field: projectShareLinkId
+    description: A trackable URL for a demo, optionally 1-1 via Launchpad.
+    fields_seen: [id, createdBy.id, createdBy.email]
+  - name: session
+    id_field: recordedGuideSessionId
+    description: One visitor's continuous engagement with a demo, closed on inactivity.
+    fields_seen: [type, createdAt, closedAt, mostRecentDemoName, recordedEvents]
+    variants: [INTERACTIVE_DEMO, AGENT_DEMO]
+  - name: agentDemoSession
+    id_field: agentDemoSessionId
+    description: The AGENT_DEMO variant of a session, tied to an agentDemoId.
+    fields_seen: [agentDemoSessionId, agentDemoId]
+  - name: recordedEvent
+    id_field: id
+    description: One activity event inside a session.
+    type_enum: [VIEW_STEP, START_FLOW, COMPLETE_FLOW, START_CHECKLIST, OPEN_CHECKLIST, CLOSE_CHECKLIST, IDENTIFY_USER, ENGAGE, CONVERTED, NAVIGATE, COMPLETE_TASK, SESSION_CLOSED]
+  - name: endUser
+    aka: visitor
+    id_field: id
+    stable_id_field: sharedId
+    description: A person who viewed a demo, identified or anonymous.
+    fields_seen: [id, sharedId, mostRecentEmail, mostRecentName, mostRecentCompany, mostRecentCountry, mostRecentCountryRegion, mostRecentCity, converted, navigated, engaged]
+  - name: companyAccount
+    id_field: id
+    description: The enriched company a visitor is matched to; nullable.
+    fields_seen: [websiteDomain, name, sector, industryGroup, industry, subIndustry, employeeCount, estimatedAnnualRevenue, amountRaised, trafficRank, foundedYear, city, state, country, postalCode, technologies, clearbitConfidence]
+    note: Firmographics are enrichment-sourced; clearbitConfidence records match confidence.
+  - name: customProperty
+    id_field: propertyId
+    description: A definition of a personalization field.
+    fields_seen: [id, name, object]
+    object_enum: [END_USER, COMPANY_ACCOUNT, VISITOR, ACCOUNT]
+  - name: customPropertyValue
+    id_field: null
+    description: A value of a custom property on a visitor or account.
+    fields_seen: [propertyId, value, createdAt, source, property]
+    source_enum: [FORM, IDENTIFY, QUERY_PARAMS, REDUCER, SHARE_LINK, PRESENTATION, ENRICHMENT, INTEGRATION, OTHER]
+relationships:
+  - {from: project, to: workspace, kind: belongs_to, via: workspaceId}
+  - {from: project, to: flow, kind: has_many, via: flowId}
+  - {from: project, to: projectVersion, kind: has_many, via: projectVersionId}
+  - {from: project, to: shareLink, kind: has_many, via: projectShareLinkId}
+  - {from: flow, to: step, kind: has_many, via: recordedStepId}
+  - {from: flow, to: project, kind: belongs_to, via: recordedProjectId}
+  - {from: step, to: capture, kind: has_one, via: 'anchor (no id published)'}
+  - {from: checklist, to: task, kind: has_many, via: recordedTaskId}
+  - {from: checklist, to: project, kind: belongs_to, via: projectId}
+  - {from: shareLink, to: endUser, kind: has_one, via: 'createdBy (the teammate who created it)'}
+  - {from: session, to: endUser, kind: belongs_to, via: endUserId}
+  - {from: session, to: project, kind: belongs_to, via: mostRecentProjectId}
+  - {from: session, to: shareLink, kind: belongs_to, via: mostRecentShareLinkId}
+  - {from: session, to: recordedEvent, kind: has_many, via: sessionId}
+  - {from: recordedEvent, to: step, kind: belongs_to, via: recordedStepId}
+  - {from: recordedEvent, to: flow, kind: belongs_to, via: flowId}
+  - {from: recordedEvent, to: checklist, kind: belongs_to, via: checklistId}
+  - {from: recordedEvent, to: projectVersion, kind: belongs_to, via: projectVersionId}
+  - {from: endUser, to: companyAccount, kind: belongs_to, via: companyAccountId}
+  - {from: endUser, to: customPropertyValue, kind: has_many, via: customPropertyValues}
+  - {from: endUser, to: recordedEvent, kind: has_many, via: endUserId}
+  - {from: companyAccount, to: customPropertyValue, kind: has_many, via: customPropertyValues}
+  - {from: customPropertyValue, to: customProperty, kind: belongs_to, via: propertyId}
+  - {from: agentDemoSession, to: session, kind: belongs_to, via: 'session.type = AGENT_DEMO'}
+coverage:
+  entities: 18
+  relationships: 24
+  derived_from_openapi: false
+  derived_from_openapi_note: >
+    The only published OpenAPI (openapi/navattic-website-openapi.json) declares
+    zero components.schemas, so no entity in this model comes from a spec.

@@ -1,0 +1,144 @@
+generated: '2026-08-13'
+method: searched
+source: live probes of every Navattic host on 2026-08-13
+description: >
+  Navattic serves a real, non-trivial /.well-known/ discovery surface. The
+  marketing host publishes an RFC 9727 api-catalog linkset that points at both
+  the website OpenAPI and the hosted MCP server, and the application host
+  publishes RFC 8414 authorization-server metadata plus RFC 9728
+  protected-resource metadata for that MCP server. No security.txt is served on
+  any host.
+hosts:
+  - https://www.navattic.com
+  - https://app.navattic.com
+  - https://docs.navattic.com
+  - https://api.navattic.com
+documents:
+  - host: https://www.navattic.com
+    path: /.well-known/api-catalog          # RFC 9727
+    status: 200
+    content_type: application/json
+    file: navattic-api-catalog.json
+    note: >
+      Linkset with two anchors — https://www.navattic.com/ (service-desc
+      /.well-known/openapi.json, service-doc docs.navattic.com, status
+      /api/health) and https://app.navattic.com/api/mcp (service-desc the OAuth
+      authorization-server metadata). This is the document that led to both the
+      website OpenAPI and the MCP server.
+  - host: https://www.navattic.com
+    path: /.well-known/openapi.json
+    status: 200
+    content_type: application/json
+    file: ../openapi/navattic-website-openapi.json
+    note: >
+      OpenAPI 3.0.3, info.title "Navattic marketing website", servers
+      https://www.navattic.com, one operation (GET /api/health). Saved verbatim
+      to openapi/.
+  - host: https://www.navattic.com
+    path: /.well-known/oauth-authorization-server
+    status: 200
+    content_type: application/json
+    file: navattic-oauth-authorization-server.json
+    note: >
+      The marketing host proxies the same document the app host serves; issuer
+      is https://app.navattic.com either way.
+  - host: https://www.navattic.com
+    path: /.well-known/security.txt
+    status: 404
+  - host: https://www.navattic.com
+    path: /.well-known/openid-configuration
+    status: 404
+  - host: https://www.navattic.com
+    path: /.well-known/ai-plugin.json
+    status: 404
+  - host: https://www.navattic.com
+    path: /.well-known/agent-card.json
+    status: 404
+  - host: https://www.navattic.com
+    path: /robots.txt
+    status: 200
+    content_type: text/plain
+    file: navattic-robots.txt
+    note: >
+      Carries a Cloudflare Content Signals policy line —
+      "Content-Signal: ai-train=no, search=yes, ai-input=no" — a published,
+      machine-readable AI consent preference. app.navattic.com and
+      api.navattic.com both serve "User-agent: * / Disallow: /" instead.
+  - host: https://app.navattic.com
+    path: /.well-known/oauth-authorization-server   # RFC 8414
+    status: 200
+    content_type: application/json
+    file: navattic-oauth-authorization-server.json
+    note: >
+      issuer https://app.navattic.com; authorization/token/registration/
+      revocation endpoints under /api/mcp/oauth/; 11 scopes_supported; dynamic
+      client registration enabled; PKCE.
+  - host: https://app.navattic.com
+    path: /.well-known/oauth-protected-resource     # RFC 9728
+    status: 200
+    content_type: application/json
+    file: navattic-oauth-protected-resource.json
+    note: >
+      resource https://app.navattic.com/api/mcp, resource_name "Navattic MCP
+      Server", bearer_methods_supported [header]. Also served at the
+      path-suffixed /.well-known/oauth-protected-resource/api/mcp (200).
+  - host: https://app.navattic.com
+    path: /.well-known/openid-configuration
+    status: 404
+  - host: https://app.navattic.com
+    path: /.well-known/security.txt
+    status: 404
+  - host: https://app.navattic.com
+    path: /.well-known/agent-card.json
+    status: 404
+  - host: https://app.navattic.com
+    path: /.well-known/api-catalog
+    status: 404
+  - host: https://docs.navattic.com
+    path: /.well-known/agent-card.json
+    status: 200
+    content_type: application/json
+    file: ../a2a/navattic-agent-card.json
+    note: >
+      A2A agent card for the documentation surface. Saved verbatim and graded in
+      a2a/navattic-a2a.yml.
+  - host: https://docs.navattic.com
+    path: /.well-known/agent-skills/navattic/skill.md
+    status: 200
+    content_type: text/markdown
+    file: ../skills/navattic-navattic.md
+    note: Provider-published Agent Skill, referenced from the agent card's skills[].url.
+  - host: https://docs.navattic.com
+    path: /llms.txt
+    status: 200
+    content_type: text/plain
+    file: ../llms/navattic-llms.txt
+  - host: https://docs.navattic.com
+    path: /.well-known/security.txt
+    status: 404
+  - host: https://docs.navattic.com
+    path: /.well-known/api-catalog
+    status: 404
+  - host: https://api.navattic.com
+    path: /.well-known/security.txt
+    status: 404
+  - host: https://api.navattic.com
+    path: /.well-known/oauth-authorization-server
+    status: 404
+  - host: https://api.navattic.com
+    path: /.well-known/agent-card.json
+    status: 404
+  - host: https://api.navattic.com
+    path: /.well-known/api-catalog
+    status: 404
+excluded:
+  - host: https://academy.navattic.com
+    path: /.well-known/openid-configuration
+    status: 200
+    reason: >
+      NOT Navattic's. The document's issuer is https://courses.thinkific.com —
+      academy.navattic.com is a Thinkific-hosted course site on a Navattic
+      CNAME, so the OIDC metadata describes Thinkific's authorization server,
+      not Navattic's. Recorded here so a later run does not mistake it for a
+      Navattic identity surface.
+security_txt: false

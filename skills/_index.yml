@@ -1,0 +1,30 @@
+generated: '2026-08-13'
+method: searched
+source: https://docs.navattic.com/.well-known/agent-skills/navattic/skill.md
+description: >
+  Navattic publishes its own Agent Skill and advertises it from its A2A agent
+  card (skills[0].url). It is saved here verbatim — not generated on the
+  provider's behalf — and no additional skills were authored, because Navattic
+  publishes no product OpenAPI whose operationIds could ground one honestly.
+skills:
+  - file: navattic-navattic.md
+    id: navattic
+    name: Navattic
+    method: searched
+    source: https://docs.navattic.com/.well-known/agent-skills/navattic/skill.md
+    verbatim: true
+    api: null
+    api_note: >
+      The skill is grounded in the documentation and the product model, not in
+      an OpenAPI. The callable surface it implies is the MCP server at
+      https://app.navattic.com/api/mcp (see mcp/navattic-mcp.yml).
+    operations: []
+    advertised_by: a2a/navattic-agent-card.json
+    description: >
+      Use when building interactive product demos, configuring demo sharing and
+      tracking, setting up integrations with CRMs and analytics tools, or
+      optimizing demo performance. Covers demo creation workflows, personalizing
+      content for prospects, analyzing engagement metrics, and enabling sales
+      teams to share demos at scale.
+x-evidence:
+  - {url: 'https://docs.navattic.com/.well-known/agent-skills/navattic/skill.md', status: 200, content_type: 'text/markdown', bytes: 13182}

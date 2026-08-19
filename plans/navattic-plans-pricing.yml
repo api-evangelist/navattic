@@ -1,7 +1,19 @@
+generated: '2026-08-13'
+method: searched
+source: https://www.navattic.com/pricing
+plan_count: 6
 name: Navattic Plans and Pricing
 description: Pricing tiers for the Navattic interactive product demo platform.
 url: https://www.navattic.com/pricing
 specificationVersion: "0.1"
+notes:
+  - >
+    Published, self-serve pricing exists — Starter (free), Starter Plus, Base and
+    Growth carry list prices; Enterprise is contact-sales.
+  - >
+    The API-relevant gate is not on this page: the MCP server requires the
+    Startup plan or above per https://docs.navattic.com/workspace/mcp-server, and
+    audit logs are Enterprise-only. Paid tiers carry a quarterly minimum.
 plans:
   - name: Starter
     description: >

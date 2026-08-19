@@ -1,0 +1,1 @@
+{"resource":"https://app.navattic.com/api/mcp","authorization_servers":["https://app.navattic.com"],"scopes_supported":["ANALYTICS","DEMO_BROWSING","DEMO_BUILDING","DEMO_MANAGEMENT","DEMO_PUBLISHING","PERSONALIZATION","LAUNCHPAD","AGENT_DEMOS","AGENT_ENVIRONMENTS","WORKSPACE_MANAGEMENT","NOTIFICATIONS"],"bearer_methods_supported":["header"],"resource_name":"Navattic MCP Server"}
