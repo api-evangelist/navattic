@@ -34,6 +34,18 @@ tags:
   - Sales Enablement
   - Marketing
   - No-Code
+  - Webhook
+  - CRM Integration
+  - Sales Automation
+  - MCP
+  - Agents
+  - Product Analytics
+tags_raw:
+  - Interactive Demos
+  - Product Demo
+  - Sales Enablement
+  - Marketing
+  - No-Code
   - Webhooks
   - CRM Integration
   - Sales Automation
@@ -55,6 +67,11 @@ apis:
     humanURL: https://docs.navattic.com/
     baseURL: https://api.navattic.com
     tags:
+      - Interactive Demos
+      - Webhook
+      - REST API
+      - MCP
+    tags_raw:
       - Interactive Demos
       - Webhooks
       - REST API
@@ -84,6 +101,11 @@ apis:
     humanURL: https://docs.navattic.com/workspace/mcp-server
     baseURL: https://app.navattic.com/api/mcp
     tags:
+      - MCP
+      - Agents
+      - Authentication
+      - Interactive Demos
+    tags_raw:
       - MCP
       - Agents
       - OAuth
