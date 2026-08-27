@@ -53,71 +53,53 @@ tags_raw:
   - Agents
   - Product Analytics
 apis:
-  - aid: navattic:navattic-api
-    name: Navattic API
-    description: >
-      The Navattic REST API allows developers to programmatically create and
-      manage interactive product demos, retrieve analytics and engagement data,
-      and integrate demo activity into downstream systems. Navattic publishes no
-      public REST reference for the product itself — its machine-readable
-      surfaces are a hosted MCP server, a fully documented outbound webhook, and
-      an RFC 9727 api-catalog on the marketing host that points at both. The
-      webhook delivers session-closed events carrying visitor engagement data,
-      company account firmographics, and CRM-linked fields.
-    humanURL: https://docs.navattic.com/
-    baseURL: https://api.navattic.com
-    tags:
-      - Interactive Demos
-      - Webhook
-      - REST API
-      - MCP
-    tags_raw:
-      - Interactive Demos
-      - Webhooks
-      - REST API
-      - MCP
-    properties:
-      - type: Documentation
-        url: https://docs.navattic.com/
-      - type: Webhooks
-        url: https://docs.navattic.com/integrations/webhook
-      - type: Pricing
-        url: https://www.navattic.com/pricing
-      - type: OpenAPI
-        url: openapi/navattic-website-openapi.json
-      - type: Overlay
-        url: overlays/navattic-website-overlay.yaml
-  - aid: navattic:navattic-mcp-server
-    name: Navattic MCP Server
-    description: >
-      Navattic's hosted, remote Model Context Protocol server — the company's
-      primary machine-readable product surface. Agents authenticate with an
-      OAuth 2.1 authorization-code flow (PKCE, dynamic client registration) or
-      with a workspace Personal Access Token sent as a bearer token, and receive
-      workspace-scoped access to demo analytics, demo browsing, demo building,
-      demo management, demo publishing, personalization and Launchpad, governed
-      by eleven published OAuth scopes. Writes carry an entity_tag optimistic
-      concurrency token and each batch of edits applies atomically.
-    humanURL: https://docs.navattic.com/workspace/mcp-server
-    baseURL: https://app.navattic.com/api/mcp
-    tags:
-      - MCP
-      - Agents
-      - Authentication
-      - Interactive Demos
-    tags_raw:
-      - MCP
-      - Agents
-      - OAuth
-      - Interactive Demos
-    properties:
-      - type: MCPServer
-        url: mcp/navattic-mcp.yml
-      - type: ToolCrosswalk
-        url: mcp/navattic-tool-crosswalk.yml
-      - type: Documentation
-        url: https://docs.navattic.com/workspace/mcp-server
+- aid: navattic:navattic-mcp-server
+  name: Navattic MCP Server
+  description: >
+    Navattic's hosted, remote Model Context Protocol server — the company's primary machine-readable product
+    surface. Agents authenticate with an OAuth 2.1 authorization-code flow (PKCE, dynamic client registration)
+    or with a workspace Personal Access Token sent as a bearer token, and receive workspace-scoped access
+    to demo analytics, demo browsing, demo building, demo management, demo publishing, personalization
+    and Launchpad, governed by eleven published OAuth scopes. Writes carry an entity_tag optimistic concurrency
+    token and each batch of edits applies atomically.
+  humanURL: https://docs.navattic.com/workspace/mcp-server
+  baseURL: https://app.navattic.com/api/mcp
+  tags:
+  - MCP
+  - Agents
+  - Authentication
+  - Interactive Demos
+  tags_raw:
+  - MCP
+  - Agents
+  - OAuth
+  - Interactive Demos
+  properties:
+  - type: MCPServer
+    url: mcp/navattic-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/navattic-tool-crosswalk.yml
+  - type: Documentation
+    url: https://docs.navattic.com/workspace/mcp-server
+- aid: navattic:navattic-health-api
+  name: Navattic Health API
+  description: The Health API from Navattic — 1 operation(s) for health.
+  humanURL: https://docs.navattic.com/
+  baseURL: https://api.navattic.com
+  tags:
+  - Health
+  properties:
+  - type: OpenAPI
+    url: openapi/navattic-health-api-openapi.yml
+  - type: Documentation
+    url: https://docs.navattic.com/
+  - type: Webhooks
+    url: https://docs.navattic.com/integrations/webhook
+  - type: Pricing
+    url: https://www.navattic.com/pricing
 common:
+  - type: Overlay
+    url: overlays/navattic-website-overlay.yaml
   - type: VulnerabilityDisclosure
     url: security/navattic-vulnerability-disclosure.yml
   - type: DomainSecurity
