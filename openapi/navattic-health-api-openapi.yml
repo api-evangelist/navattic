@@ -1,0 +1,27 @@
+openapi: 3.2.0
+info:
+  title: Navattic marketing website Health API
+  version: 1.0.0
+  description: Public HTTP surface for www.navattic.com. Product APIs and MCP are hosted on app.navattic.com; see /.well-known/api-catalog.
+servers:
+- url: https://www.navattic.com
+tags:
+- name: Health
+paths:
+  /api/health:
+    get:
+      summary: Health check
+      operationId: health
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+      tags:
+      - Health
