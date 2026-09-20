@@ -3,10 +3,13 @@
   "feeds": [
     {
       "source": "https://www.linkedin.com/company/navattic",
-      "error": "HTTPError"
+      "feed_url": "https://www.linkedin.com/company/navattic",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
-  "fetched": "2026-09-13T13:00:00Z",
+  "fetched": "2026-09-19T20:17:39Z",
   "post_count": 7,
   "agent_pulled": "2026-07-04",
   "feed_nature": "vendor-blog",
