@@ -1,0 +1,12 @@
+{
+ "url": "https://www.navattic.com/.well-known/openapi.json",
+ "requested_url": "https://www.navattic.com/.well-known/openapi.json",
+ "status": 200,
+ "content_type": "application/json; charset=utf-8",
+ "bytes": 799,
+ "sha256": "7673ab27430af5ce7127530828bfd19e9a313ed2c5c72578687067a63918510e",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the archived file is byte-identical to what the provider serves."
+}
